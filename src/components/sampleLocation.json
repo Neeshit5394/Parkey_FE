@@ -1,0 +1,211 @@
+{"predictions" : [
+      {
+         "description" : "SoHo, Manhattan, New York, NY, USA",
+         "id" : "adfeb648ea9edccec8a59567ee123bc7ffd59b56",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJ8-JRXoxZwokRGPiQ9Ek0L84",
+         "reference" : "ChIJ8-JRXoxZwokRGPiQ9Ek0L84",
+         "structured_formatting" : {
+            "main_text" : "SoHo",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "Manhattan, New York, NY, USA"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "SoHo"
+            },
+            {
+               "offset" : 6,
+               "value" : "Manhattan"
+            },
+            {
+               "offset" : 17,
+               "value" : "New York"
+            },
+            {
+               "offset" : 27,
+               "value" : "NY"
+            },
+            {
+               "offset" : 31,
+               "value" : "USA"
+            }
+         ],
+         "types" : [ "neighborhood", "political", "geocode" ]
+      },
+      {
+         "description" : "Secaucus, NJ, USA",
+         "id" : "16f821b252262817285b997cf2d4e65d8e90b5ce",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJD-XGzLZXwokRTw5UpowEXV8",
+         "reference" : "ChIJD-XGzLZXwokRTw5UpowEXV8",
+         "structured_formatting" : {
+            "main_text" : "Secaucus",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "NJ, USA"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Secaucus"
+            },
+            {
+               "offset" : 10,
+               "value" : "NJ"
+            },
+            {
+               "offset" : 14,
+               "value" : "USA"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      },
+      {
+         "description" : "Staten Island, NY, USA",
+         "id" : "c5e26ff1f7f90185e5ef69b4258855133cf7dd40",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJ59T0ee9FwokReLy6NIUfJ1A",
+         "reference" : "ChIJ59T0ee9FwokReLy6NIUfJ1A",
+         "structured_formatting" : {
+            "main_text" : "Staten Island",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "NY, USA"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Staten Island"
+            },
+            {
+               "offset" : 15,
+               "value" : "NY"
+            },
+            {
+               "offset" : 19,
+               "value" : "USA"
+            }
+         ],
+         "types" : [ "sublocality_level_1", "sublocality", "political", "geocode" ]
+      },
+      {
+         "description" : "St. Patrick's Cathedral, 5th Avenue, New York, NY, USA",
+         "id" : "acf24f96362bdabb64807f6c17cba8bb1d5b738a",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJUW4vEPxYwokRW6o24DU0YIg",
+         "reference" : "ChIJUW4vEPxYwokRW6o24DU0YIg",
+         "structured_formatting" : {
+            "main_text" : "St. Patrick's Cathedral",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "5th Avenue, New York, NY, USA"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "St. Patrick's Cathedral"
+            },
+            {
+               "offset" : 25,
+               "value" : "5th Avenue"
+            },
+            {
+               "offset" : 37,
+               "value" : "New York"
+            },
+            {
+               "offset" : 47,
+               "value" : "NY"
+            },
+            {
+               "offset" : 51,
+               "value" : "USA"
+            }
+         ],
+         "types" : [
+            "tourist_attraction",
+            "church",
+            "place_of_worship",
+            "point_of_interest",
+            "establishment"
+         ]
+      },
+      {
+         "description" : "Stamford, CT, USA",
+         "id" : "0cbc0d657ff6fc1c61e7b059f4b63b45fe9e10d2",
+         "matched_substrings" : [
+            {
+               "length" : 1,
+               "offset" : 0
+            }
+         ],
+         "place_id" : "ChIJC7zHsmShwokRbrc0nIuGQ4c",
+         "reference" : "ChIJC7zHsmShwokRbrc0nIuGQ4c",
+         "structured_formatting" : {
+            "main_text" : "Stamford",
+            "main_text_matched_substrings" : [
+               {
+                  "length" : 1,
+                  "offset" : 0
+               }
+            ],
+            "secondary_text" : "CT, USA"
+         },
+         "terms" : [
+            {
+               "offset" : 0,
+               "value" : "Stamford"
+            },
+            {
+               "offset" : 10,
+               "value" : "CT"
+            },
+            {
+               "offset" : 14,
+               "value" : "USA"
+            }
+         ],
+         "types" : [ "locality", "political", "geocode" ]
+      }
+   ],
+   "status" : "OK"
+}

@@ -20,3 +20,181 @@
 .App-link {
   color: #09d3ac;
 }
+
+#title-banner{
+  background-image: url("./components/images/title_banner.png") ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:transparent;
+  border-radius:0px;
+  color:white;
+  min-height:620px;
+}
+.center-block{
+  text-align:center;
+}
+.center-block h2{
+  font-size: 300%;
+  padding:10px;
+  font-weight: 400;
+  text-shadow:1px 0px ;
+  font-family: 'DM Serif Display', serif;
+}
+.center-block h3{
+  font-size: 150%;
+  padding:10px;
+  font-family: 'Lexend Deca', sans-serif;
+}
+.search-bar {
+  max-width:60%;
+  min-width:80px;
+  padding:20px;
+}
+.parkey-logo{
+  font-family: 'Damion', cursive;
+  font-weight: normal;
+  font-size:150%;
+}
+.flyer-title .parkey-logo{
+  font-size: 50px;
+}
+.navbar-brand h1{
+  color:#082937;
+  font-family: 'Damion', cursive;
+}
+.search-bar-input {
+  padding:15px;
+  height: 60px;
+  width: 100%;
+  color:black!important;
+  border-radius:25px;
+  box-shadow: none;
+  border:none;
+}
+.search-bar-input:focus{
+  box-shadow: none;
+  border:none;
+}
+.col-lg-6, .col-sm-12, .col-md-12{
+  padding:10px;
+}
+.row-content{
+  box-shadow:2px 2px 10px 0px;
+  padding:30px;
+}
+.rent_buy_tab{
+  text-align:center;
+  color:black;
+ 
+}
+.flyers_image{
+  height:50%;
+  width:80%;
+  min-width:100px;
+  min-height:150px;
+}
+.flyers_image1{
+  height:50%;
+  width:45%;
+  min-width:100px;
+  min-height:150px;
+}
+.flyer-head{
+  font-weight:500;
+  text-shadow: 0.5px 0.1px ;
+  font-family: 'DM Serif Display', serif;
+  font-size:150%;
+  padding:20px;
+}
+.flyer-btn{
+  background-color:white;
+  border-color:grey;
+  color:#082937;
+}
+.flyer-btn:hover,.flyer-btn:active {
+  background-color:#082937;
+  border-color:#082937;
+  color:white;
+}
+.flyers{
+  padding-bottom:100px;
+}
+.footer{
+  background-image: url("./components/images/fotter2.jpg") ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:transparent;
+  min-height:250px;
+}
+.mid-link{
+  text-align:center;
+  font-weight:700;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 120%;
+  color:black;
+  padding:2%;
+  background-color:#E8E8E8;
+}
+.footer-desc{
+  text-align:center;
+}
+.flyer-desc{
+  padding:10px;
+}
+.footer-image{
+  width:100%;
+}
+.flyer-title{
+  font-weight:bold;
+  text-align:center;
+  padding:90px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size:30px;
+}
+a{
+  text-decoration: none !important;
+}
+.common-modal-login-footer{
+  width:100%;
+}
+.common-modal-login-footer-text{
+  text-align:center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.signIn-tab{
+  padding: 20px 0px 0px 0px;
+  background-color:transparent;
+  margin-bottom:0px;
+}
+.social-media-btn{
+  font-size:15px;
+}
+.custom-model .modal-body{
+  padding-bottom:2px;
+}
+.custom-model-head {
+  border-bottom:none;
+  padding-bottom:1px;
+}
+.custom-modal-title{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bolder;
+}
+.form-end-text{
+  text-align:center;
+  color:#007bff;
+  margin:10px 0px 0px 0px ;
+}
+.nav-link{
+  cursor: pointer;
+}
+.term-text{
+  text-align:center;
+  margin:10px 0px 0px 0px ;
+  font-size:13px;
+}
+.signup-password-form-text{
+  padding-left:5px;
+  margin-bottom:15px;     
+  color:lightgrey;
+}

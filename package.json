@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.1.7",
+    "mdbreact": "^4.22.0",
     "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-fontawesome": "^1.6.1",
+    "react-map-gl-geocoder": "^2.0.11",
+    "react-places-autocomplete": "^7.2.1",
+    "react-router-dom": "^5.1.2",
+    "react-router-modal": "^1.5.2",
+    "react-scripts": "3.2.0",
+    "react-social-login-buttons": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
