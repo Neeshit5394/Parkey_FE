@@ -64,10 +64,12 @@ class LocationSearchInput extends React.Component {
   }
   handleSelect = address => {
     // geocodeByAddress(address) // original
-    
     this.abc(address)// demo purpose change in code
       .then(results => (results[0]))
-      .then(latLng => console.log('Success',/* getLatLng(latLng)*/this.getdemoLatLng(address)))
+      .then(latLng => {
+        this.props.history.push("getParking/:id")
+        console.log('Success',/* getLatLng(latLng)*/this.getdemoLatLng(address))
+      })
       .catch(error => console.error('Error', error));
   };
  

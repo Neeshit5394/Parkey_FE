@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom';
 import homepage from './homepage';
 import "../App.css";
 import SignInJoinNowModal from "./SigIn-JoinNow-Tabs";
-
+import SearchParking from "./SearchParking";
 
 class NavBar extends Component {
     
@@ -79,6 +79,7 @@ class NavBar extends Component {
           <div>
               <Switch>
                   <Route path="/" exact component={homepage} />
+                  <Route path="/getParking/:id" component={SearchParking} />
               </Switch>
           </div>
           

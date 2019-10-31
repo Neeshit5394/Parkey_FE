@@ -21,8 +21,8 @@ class Homepage extends Component {
     }
     signInToggle() {
         this.setState({
-         signInModalShow:!this.state.signInModalShow,
-     })
+            signInModalShow:!this.state.signInModalShow,
+        })
     }
     render() {
         return(
