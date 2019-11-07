@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -198,8 +198,8 @@ a{
   color:lightgrey;
 }
 .searchParking-container {
-  margin:0px 15px 0px 0px;
   padding:0px;
+  overflow: hidden;
   background-color:transparent;
 }
 .map-container{
@@ -224,3 +224,27 @@ a{
   overflow-y:scroll;
   overflow-x:hidden;
 }
+.location-result-menu{
+  border-top: 1px solid lightgrey;
+  padding:10px;
+}
+.location-result-searchBar{
+  margin:0px 0px 0px 15px;
+  border:1px solid #082937;
+  border-radius:5px;
+  padding:1px;
+}
+.location-result-searchBar .search-bar-input{
+  height:10px;
+}
+.menu-btn{
+  padding:0px;
+  margin:0px 0px 0px 15px;
+}
+.menu-btn .btn{
+  margin:0px;
+  width:100%;
+  background-color:white;
+  color:#082937;
+  border-color: #082937;
+} */

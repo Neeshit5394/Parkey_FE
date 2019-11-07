@@ -1,10 +1,11 @@
 import React from 'react';
+import Styled from "./styled";
 import {withRouter} from 'react-router-dom'; 
 import PlacesAutocomplete, {
   // geocodeByAddress,
   // getLatLng,
 } from 'react-places-autocomplete';
-const sampleLocationData = require('./sampleLocation.json');
+const sampleLocationData = require('../sampleLocation.json');
 const sampleLocationLatLang = {
   "SoHo, Manhattan, New York, NY, USA":{
     "lat": 40.723301,
@@ -31,25 +32,30 @@ const sampleLocationLatLang = {
   }
 }
  
-class LocationSearchInput extends React.Component {
+class LocationSearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { address: '' ,
                   suggestionDemo: [], // demo purpose change in code
+                  placeholder: 'Enter an address, neighborhood, city or ZIP code',
+                  suggestionsBox:false,
+                  selectedAddress:undefined,
                   };
   }
  
   handleChange = address => {
     // for demo purpose -- code change;
-    console.log(address);
+
     if(address === ""||address === undefined){
       this.setState({
         suggestionDemo:[],
+        suggestionsBox:false,
       })
     }
     else{
       this.setState({
         suggestionDemo:sampleLocationData.predictions,
+        suggestionsBox:true,
       })
     }
     // upto here 
@@ -62,12 +68,25 @@ class LocationSearchInput extends React.Component {
   async getdemoLatLng(address){
     return sampleLocationLatLang[address]
   }
-  handleSelect = address => {
+  handleSelect =  address => {
     // geocodeByAddress(address) // original
     this.abc(address)// demo purpose change in code
       .then(results => (results[0]))
-      .then(latLng => {
-        this.props.history.push("getParking/:id")
+      .then(async latLng => {
+        let lataLng= (await this.getdemoLatLng(address))
+        
+        this.setState({
+          suggestionDemo:[],
+          suggestionsBox:false,
+          selectedAddress:address
+        })
+        this.props.history.push({
+          pathname:"/parkings/"+address,
+          state:{
+            latlang:lataLng
+          }
+        })
+
         console.log('Success',/* getLatLng(latLng)*/this.getdemoLatLng(address))
       })
       .catch(error => console.error('Error', error));
@@ -80,15 +99,19 @@ class LocationSearchInput extends React.Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
-        {({ getInputProps, suggestions,demo=this.state.suggestionDemo, getSuggestionItemProps, loading }) => (
+        {({ getInputProps, suggestions, demo=this.state.suggestionDemo, getSuggestionItemProps, loading }) => (
           <div>
-            <input
+            
+            <Styled.SearchBar
               {...getInputProps({
-                placeholder: 'Enter an address, neighborhood, city or ZIP code',
-                className: 'location-search-input search-bar-input ',
+                placeholder:this.state.placeholder,
+                className: 'location-search-input search-bar-input',
               })}
+              value ={this.state.selectedAddress}
+              suggestionBox={this.state.suggestionsBox}  
             />
-            <div className="autocomplete-dropdown-container ">
+            
+            <Styled.suggestionContainer className="autocomplete-dropdown-container ">
               {loading && <div>Loading...</div>}
               {/*suggestions*/demo.map(suggestion => {  // changed for demo purpose
                 const className = suggestion.active
@@ -96,7 +119,7 @@ class LocationSearchInput extends React.Component {
                   : 'suggestion-item';
                 // inline style for demonstration purpose
                 const style = suggestion.active
-                  ? { backgroundColor: '#fafafa',color:"black",padding:"10px", cursor: 'pointer' }
+                  ? { backgroundColor: '#fafafa', color:"black",padding:"10px", cursor: 'pointer' }
                   : { backgroundColor: '#ffffff', color:"black",padding:"10px", cursor: 'pointer' };
                 return (
                   <div
@@ -109,11 +132,11 @@ class LocationSearchInput extends React.Component {
                   </div>
                 );
               })}
-            </div>
+            </Styled.suggestionContainer>
           </div>
         )}
       </PlacesAutocomplete>
     );
   }
 }
-export default withRouter(LocationSearchInput);
+export default withRouter(LocationSearchBar);
