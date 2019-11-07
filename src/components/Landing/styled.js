@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const headbanner = styled.div `
     
-    background-image:url( ${require("../images/title_banner.png")});
+    background-image:url( ${require("../../images/title_banner.png")});
     background-repeat: no-repeat;
     background-size: cover;
     background-color:transparent;

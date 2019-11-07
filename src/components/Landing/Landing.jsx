@@ -45,7 +45,7 @@ class Landing extends Component {
               <div className="row-content">
                 <Styled.service>
                   <div>
-                    <img alt="rent" id="rent" src={require('../images/flyer1.jpg')} />
+                    <img alt="rent" id="rent" src={require('../../images/flyer1.jpg')} />
                   </div>
                   <div className="service-heading">Rent Parking Space </div>
                   <p className="service-description" >Now Earn money with Parkey by renting your parking spot for hours, days and month. Parkey will provide a smooth way to interact with people and help you to Earn </p>
@@ -59,7 +59,7 @@ class Landing extends Component {
               <div className="row-content">
                 <Styled.service>
                   <div>
-                    <img alt="buy" id="buy" src={require('../images/flyer2.jpg')} />
+                    <img alt="buy" id="buy" src={require('../../images/flyer2.jpg')} />
                   </div>
                   <div className="service-heading">Get Parking Space </div>
                   <p className="service-description" >Now with Parkey forget about the stress for finding the parking spot near your current location. Now find parking spot anywhere and anytime using Parkey </p>
@@ -84,7 +84,7 @@ class Landing extends Component {
             <p>Parkey is committed to ensuring digital accessibility for individuals with disabilities. We are continuously working to improve the accessibility of our web experience for everyone, and we welcome feedback and accommodation requests. If you wish to report an issue or seek an accommodation, please contact us.</p>
             <p>Copyright 2019 Parkey. All Rights Reserved.</p>
           </div>
-          <img alt="footer-flyer" className="footer-image" src={require('../images/fotter2.jpg')} />
+          <img alt="footer-flyer" className="footer-image" src={require('../../images/fotter2.jpg')} />
         </Styled.footer>
         <AuthenticationModal show={this.state.signInModalShow} onHide={() => this.signInToggle()} />
       </>
