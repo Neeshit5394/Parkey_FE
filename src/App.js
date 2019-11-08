@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/navbar'
+import Capsule from './components/Capsule'
 
 
 export default function App() {
   return (
-    <Navbar/>
+    <Capsule/>
   )
 }
