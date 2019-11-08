@@ -25,13 +25,13 @@ class Parkings extends Component {
       <Styled.Wrapper className="jumbotron">
         <Styled.MenuWrapper>
           <div className="row">
-            <Styled.LocationSearchBar className="col-sm-8 col-md-4 col-lg-4">
+            <Styled.LocationSearchBar className="col-sm-11 col-md-11 col-lg-4">
               <LocationSearchInput />
             </Styled.LocationSearchBar>
-            <Styled.MenuBtn className="col-sm-1 col-md-1 col-lg-1">
+            <Styled.MenuBtn className="col-sm-11 col-md-11 col-lg-1">
               <button type="button" className="btn btn-primary">Rent</button>
             </Styled.MenuBtn>
-            <Styled.MenuBtn className="col-sm-1 col-md-1 col-lg-1">
+            <Styled.MenuBtn className="col-sm-11 col-md-11 col-lg-1">
               <button type="button" className="btn btn-primary">Filter</button>
             </Styled.MenuBtn>
           </div>

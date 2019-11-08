@@ -16,7 +16,7 @@ const MenuWrapper = styled.div`
 
 const LocationSearchBar = styled.div`
     
-    margin:0px 0px 0px 15px;
+    margin:0px 15px 0px 15px;
     border:1px solid #082937;
     border-radius:5px;
     padding:0px;
@@ -33,7 +33,7 @@ const LocationSearchBar = styled.div`
 const MenuBtn = styled.div`
     
     padding:0px;
-    margin:0px 0px 0px 15px;
+    margin:0px 15px 0px 15px;
 
     .btn{
         margin:0px;
