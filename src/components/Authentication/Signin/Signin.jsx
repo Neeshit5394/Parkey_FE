@@ -1,13 +1,15 @@
+import { Button, Form } from "react-bootstrap";
+import React, { Component } from "react";
 
-
-import React, { Component } from 'react';
-import { Button, Form} from 'react-bootstrap'
 import Styled from "./styled";
+import { authState } from "./../../../actions";
+import { connect } from "react-redux";
 
 class Signin extends Component {
   state = {
     hasError: false,
-  }
+    isAuth: null
+  };
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
@@ -21,14 +23,26 @@ class Signin extends Component {
           <Form.Group controlId="formBasicPassword">
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Button variant="primary" size="md" type="submit" block>
+          <Button
+            variant="primary"
+            size="md"
+            type="submit"
+            onClick={e => {
+              e.preventDefault();
+              this.props.authState(true);
+              console.log(this.state);
+            }}
+            block
+          >
             Submit
-              </Button>
+          </Button>
         </Form>
         <Styled.FormNote>Forget your Password?</Styled.FormNote>
       </Styled.SigninForm>
     );
   }
 }
-
-export default Signin;
+const mapStateToProps = state => {
+  return { auth: state.isAuth };
+};
+export default connect(mapStateToProps, { authState })(Signin);
