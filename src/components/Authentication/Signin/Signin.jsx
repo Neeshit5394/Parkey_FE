@@ -30,7 +30,7 @@ class Signin extends Component {
             onClick={e => {
               e.preventDefault();
               this.props.authState(true);
-              console.log(this.state);
+              console.log(this.props.isAuth);
             }}
             block
           >
