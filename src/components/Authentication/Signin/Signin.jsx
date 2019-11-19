@@ -7,8 +7,7 @@ import { connect } from "react-redux";
 
 class Signin extends Component {
   state = {
-    hasError: false,
-    isAuth: null
+    hasError: false
   };
   render() {
     if (this.state.hasError) {
@@ -30,7 +29,6 @@ class Signin extends Component {
             onClick={e => {
               e.preventDefault();
               this.props.authState(true);
-              console.log(this.props.isAuth);
             }}
             block
           >
@@ -43,6 +41,7 @@ class Signin extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log(state);
   return { auth: state.isAuth };
 };
 export default connect(mapStateToProps, { authState })(Signin);
