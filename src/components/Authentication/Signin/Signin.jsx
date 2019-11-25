@@ -2,25 +2,37 @@ import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 
 import Styled from "./styled";
-import { authState } from "./../../../actions";
+import { signIn } from "./../../../actions";
 import { connect } from "react-redux";
 
 class Signin extends Component {
   state = {
+    email: null,
+    password: null,
     hasError: false
   };
+
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
+
     return (
       <Styled.SigninForm className="jumbotron">
         <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              onChange={e => this.setState({ email: e.target.value })}
+            />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              onChange={e => this.setState({ password: e.target.value })}
+            />
           </Form.Group>
           <Button
             variant="primary"
@@ -28,7 +40,7 @@ class Signin extends Component {
             type="submit"
             onClick={e => {
               e.preventDefault();
-              this.props.authState(true);
+              this.props.signIn(this.state.email, this.state.password);
             }}
             block
           >
@@ -41,7 +53,6 @@ class Signin extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state);
-  return { auth: state.isAuth };
+  return { user: state.user };
 };
-export default connect(mapStateToProps, { authState })(Signin);
+export default connect(mapStateToProps, { signIn })(Signin);

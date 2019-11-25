@@ -1,9 +1,4 @@
 import { combineReducers } from "redux";
-const authReducer = (isAuth = null, action) => {
-  if (action.type === "SELECTED") {
-    return action.payload;
-  }
-  return isAuth;
-};
+import signInReducer from "./signInReducer";
 
-export default combineReducers({ auth: authReducer });
+export default combineReducers({ signIn: signInReducer });
