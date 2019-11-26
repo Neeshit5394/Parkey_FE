@@ -13,6 +13,7 @@ class Signin extends Component {
   };
 
   render() {
+    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -53,6 +54,6 @@ class Signin extends Component {
   }
 }
 const mapStateToProps = state => {
-  return { user: state.user };
+  return { user: { ...state.user } };
 };
 export default connect(mapStateToProps, { signIn })(Signin);

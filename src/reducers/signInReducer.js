@@ -1,7 +1,9 @@
-export default (state = [], action) => {
+export default (state = {
+  user: null
+}, action) => {
   switch (action.type) {
     case "SIGN_IN":
-      return state.concat([action.payload]);
+      return {...state, user : action.payload};
     default:
       return state;
   }
