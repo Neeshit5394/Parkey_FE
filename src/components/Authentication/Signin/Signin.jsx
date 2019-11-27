@@ -2,18 +2,18 @@ import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 
 import Styled from "./styled";
-import { signIn } from "./../../../actions";
+import { signIn } from "../../../store/actions/authActions";
 import { connect } from "react-redux";
 
 class Signin extends Component {
   state = {
     email: null,
     password: null,
-    hasError: false
+    hasError: false,
+    authState: this.props.authState
   };
 
   render() {
-    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -54,6 +54,6 @@ class Signin extends Component {
   }
 }
 const mapStateToProps = state => {
-  return { user: { ...state.user } };
+  return { authState: state.authState };
 };
 export default connect(mapStateToProps, { signIn })(Signin);

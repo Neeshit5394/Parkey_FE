@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import Styled from "./styled";
-import firebase from "./../../../Firebase";
+import { connect } from "react-redux";
+import { signUp } from "./../../../store/actions";
 class Signup extends Component {
   state = {
     hasError: false
@@ -41,15 +42,7 @@ class Signup extends Component {
             type="submit"
             onClick={e => {
               e.preventDefault();
-              firebase
-                .auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then(data => {
-                  console.log(data.user);
-                })
-                .catch(error => {
-                  console.log(error);
-                });
+              this.props.signUp()
             }}
             block
           >
@@ -64,4 +57,7 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+const mapStateToProps = state => {
+  return { state: state.authState };
+};
+export default connect(mapStateToProps, { signUp })(Signup);
