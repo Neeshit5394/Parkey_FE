@@ -8,7 +8,7 @@ import {
 import SignIn from "./Signin";
 import SignUp from "./Signup";
 
-class Authentication extends Component {
+class AuthenticationModal extends Component {
   state = {
     hasError: false
   };
@@ -57,4 +57,4 @@ class Authentication extends Component {
   }
 }
 
-export default Authentication;
+export default AuthenticationModal;
