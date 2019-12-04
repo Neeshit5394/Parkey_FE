@@ -1,4 +1,8 @@
 import { combineReducers } from "redux";
-import signInReducer from "./signInReducer";
+import authReducer from "./authReducer";
+import UIReducer from "./UIReducer";
 
-export default combineReducers({ authState: signInReducer });
+export default combineReducers({ 
+    authState: authReducer ,
+    uiState:UIReducer
+});

@@ -1,2 +1,11 @@
-import  {signIn, signUp} from './authActions'
-export {signIn,signUp}
+
+export {
+    signIn,
+    signUp,
+    resetErrorFlag,
+    signOut
+} from "./authActions"
+
+export {
+    toogleAuthModal,
+} from "./UIActions"

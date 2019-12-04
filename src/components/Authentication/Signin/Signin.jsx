@@ -1,17 +1,70 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Alert } from "react-bootstrap";
 import React, { Component } from "react";
 
 import Styled from "./styled";
-import { signIn } from "../../../store/actions/authActions";
+import { signIn, resetErrorFlag } from "../../../store/actions/authActions";
 import { connect } from "react-redux";
 
 class Signin extends Component {
   state = {
-    email: null,
-    password: null,
+    email: "",
+    password: "",
     hasError: false,
+    error: "",
+    visible:false,
     authState: this.props.authState
   };
+  onShowAlert = () => {
+    this.setState({ ...this.state, visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ ...this.state, visible: false })
+      }, 5000)
+    });
+  }
+
+  componentDidUpdate(){
+    if(this.props.authError!=null){
+      this.onShowAlert();
+      this.setState({
+        error:this.props.authError,
+      })
+      this.props.resetErrorFlag();
+    }
+     
+  }
+
+  handleOnChange = (e) => {
+    this.handleOnChange.bind(this);
+    this.setState({
+      [e.target.id]: e.target.value,
+      error:""
+    })
+  }
+  handleOnSubmit = (e) => {
+    e.preventDefault()
+    if (!this.state.email || this.state.email == null || this.state.email == undefined) {
+      this.setState({
+        error: "Please enter Email",
+      })
+      this.onShowAlert()
+      return false;
+    }
+    if (!this.state.password || this.state.password == null || this.state.password == undefined) {
+      this.setState({
+        error: "Please enter password",
+      })
+      this.onShowAlert()
+      return false;
+    }
+    else {
+      this.props.signIn({email: this.state.email, password: this.state.password});
+      this.setState({
+        email: "",
+        password: "",
+      })
+    }
+  }
+
 
   render() {
     if (this.state.hasError) {
@@ -20,29 +73,28 @@ class Signin extends Component {
 
     return (
       <Styled.SigninForm className="jumbotron">
-        <Form>
-          <Form.Group controlId="formBasicEmail">
+        <Alert key="danger-alert" show={this.state.visible} variant="danger">
+            {this.state.error}
+        </Alert>
+        <Form onSubmit={this.handleOnSubmit}>
+          <Form.Group controlId="email">
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onChange={e => this.setState({ email: e.target.value })}
+              onChange={this.handleOnChange}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group controlId="password">
             <Form.Control
               type="password"
               placeholder="Password"
-              onChange={e => this.setState({ password: e.target.value })}
+              onChange={this.handleOnChange}
             />
           </Form.Group>
           <Button
             variant="primary"
             size="md"
             type="submit"
-            onClick={e => {
-              e.preventDefault();
-              this.props.signIn(this.state.email, this.state.password);
-            }}
             block
           >
             Submit
@@ -53,7 +105,16 @@ class Signin extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+    resetErrorFlag: () => dispatch(resetErrorFlag())
+  };
+}
+
 const mapStateToProps = state => {
-  return { authState: state.authState };
+  return { 
+    authError: state.authState.authError 
+  };
 };
-export default connect(mapStateToProps, { signIn })(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

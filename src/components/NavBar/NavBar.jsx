@@ -3,24 +3,23 @@ import Styled from "./styled";
 
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Authentication from "../Authentication";
+import { connect } from "react-redux";
+import SignInLinks from "./SignInLinks";
+import SignOutLinks from "./SignOutLinks";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInModalShow: false,
       hasError: false
     };
   }
-  signInToggle() {
-    this.setState({
-      signInModalShow: !this.state.signInModalShow
-    });
-  }
+
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
+    let authLink = this.props.profile ?<SignOutLinks/>: <SignInLinks/>
     return (
       <div>
         <Router>
@@ -63,32 +62,24 @@ class NavBar extends Component {
                 <Styled.navlink className="navbar-toggler-icon"></Styled.navlink>
               </button>
             </div>
-            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Styled.navlink
-                    className="nav-link"
-                    onClick={() => this.signInToggle()}
-                  >
-                    Sign in or Join
-                  </Styled.navlink>
-                </li>
-                <li className="nav-item">
-                  <Link to="/">
-                    <Styled.navlink className="nav-link">Help</Styled.navlink>
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            {authLink}
           </nav>
         </Router>
         <Authentication
-          show={this.state.signInModalShow}
-          onHide={() => this.signInToggle()}
+          show={this.props.showAuthModal}
+          onHide={() => this.props.toogleAuthModal()}
         />
       </div>
+      
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    showAuthModal: state.uiState.showAuthModal,
+    profile: state.authState.profile
+  };
+};
 
-export default NavBar;
+
+export default connect(mapStateToProps)(NavBar);
