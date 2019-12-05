@@ -7,5 +7,5 @@ export {
 } from "./authActions"
 
 export {
-    toogleAuthModal,
+    toggleAuthModal,
 } from "./UIActions"

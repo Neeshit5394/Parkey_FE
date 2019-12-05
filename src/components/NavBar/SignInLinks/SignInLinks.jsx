@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Styled from "./styled";
 import { Link } from "react-router-dom";
-import { toogleAuthModal } from "../../../store/actions";
+import { toggleAuthModal } from "../../../store/actions";
 import { connect } from "react-redux";
 
 class SignInLinks extends Component {
@@ -19,7 +19,7 @@ class SignInLinks extends Component {
           <li className="nav-item">
             <Styled.navlink
               className="nav-link"
-              onClick={() => this.props.toogleAuthModal()}
+              onClick={() => this.props.toggleAuthModal()}
             >
               Sign in or Join
         </Styled.navlink>
@@ -37,7 +37,7 @@ class SignInLinks extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toogleAuthModal: () => dispatch(toogleAuthModal())
+    toggleAuthModal: () => dispatch(toggleAuthModal())
   };
 }
 

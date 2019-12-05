@@ -6,7 +6,7 @@ import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
-
+import { toggleAuthModal } from "./../../store/actions";
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,9 @@ class NavBar extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    let authLink = this.props.profile ?<SignOutLinks/>: <SignInLinks/>
+    // console.log(this.props.profile);
+    // let { profile } = JSON.parse(this.props.profile);
+    let authLink = this.props.profile ? <SignOutLinks /> : <SignInLinks />;
     return (
       <div>
         <Router>
@@ -67,10 +69,11 @@ class NavBar extends Component {
         </Router>
         <Authentication
           show={this.props.showAuthModal}
-          onHide={() => this.props.toogleAuthModal()}
+          onHide={() => {
+            this.props.toggleAuthModal();
+          }}
         />
       </div>
-      
     );
   }
 }
@@ -81,5 +84,4 @@ const mapStateToProps = state => {
   };
 };
 
-
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { toggleAuthModal })(NavBar);
