@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Styled from "./styled";
+import firebase from "./../../Firebase";
 
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
-import { toggleAuthModal } from "./../../store/actions";
+import { toggleAuthModal, getAuthStatus } from "./../../store/actions";
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -14,14 +15,15 @@ class NavBar extends Component {
       hasError: false
     };
   }
+  componentDidMount() {
+    this.props.getAuthStatus();
+  }
 
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    // console.log(this.props.profile);
-    // let { profile } = JSON.parse(this.props.profile);
-    let authLink = this.props.profile ? <SignOutLinks /> : <SignInLinks />;
+    let authLink = this.props.authStatus ? <SignOutLinks /> : <SignInLinks />;
     return (
       <div>
         <Router>
@@ -80,8 +82,11 @@ class NavBar extends Component {
 const mapStateToProps = state => {
   return {
     showAuthModal: state.uiState.showAuthModal,
-    profile: state.authState.profile
+    profile: state.authState.profile,
+    authStatus: state.authState.authStatus
   };
 };
 
-export default connect(mapStateToProps, { toggleAuthModal })(NavBar);
+export default connect(mapStateToProps, { toggleAuthModal, getAuthStatus })(
+  NavBar
+);

@@ -6,10 +6,7 @@ export const signIn = cred => async dispatch => {
     const { user } = await firebase
       .auth()
       .signInWithEmailAndPassword(cred.email, cred.password);
-    // To do :write an Api calling for fetching user database in MongoDb
-    firebase.auth().onAuthStateChanged(user => {
-      console.log(user);
-    });
+    // To do :write an Api calling for fetching user database in MongoDB
     const payload = {
       email: user.email,
       uid: user.uid
@@ -70,5 +67,21 @@ export const signOut = () => async dispatch => {
 export const resetErrorFlag = () => dispatch => {
   dispatch({
     type: actionTypes.RESET_AUTH_FLAG
+  });
+};
+
+export const getAuthStatus = () => dispatch => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      dispatch({
+        type: actionTypes.AUTH_STATUS,
+        payload: true
+      });
+    } else {
+      dispatch({
+        type: actionTypes.AUTH_STATUS,
+        payload: false
+      });
+    }
   });
 };

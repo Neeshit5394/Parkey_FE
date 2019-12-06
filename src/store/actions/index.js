@@ -3,7 +3,8 @@ export {
     signIn,
     signUp,
     resetErrorFlag,
-    signOut
+    signOut,
+    getAuthStatus
 } from "./authActions"
 
 export {

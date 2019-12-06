@@ -4,7 +4,8 @@ import { updatedObject } from "../utility";
 
 const intialState = {
   authError: null,
-  profile: null
+  profile: null,
+  authStatus:null
 };
 
 export default (state = intialState, action) => {
@@ -13,7 +14,7 @@ export default (state = intialState, action) => {
       let newState = updatedObject(state, {
         profile: action.payload
       });
-      localStorage.setItem("state", JSON.stringify(newState));
+      // localStorage.setItem("state", JSON.stringify(newState));
       return newState;
 
     case actionTypes.SIGN_UP:
@@ -38,7 +39,10 @@ export default (state = intialState, action) => {
       return updatedObject(state, {
         authError: action.payload
       });
-
+    case actionTypes.AUTH_STATUS:
+      return updatedObject(state, {
+        authStatus: action.payload
+      });
     default:
       return state;
   }
