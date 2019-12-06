@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
+import { toogleAuthModal } from "../../store/actions";
 import SignOutLinks from "./SignOutLinks";
 
 class NavBar extends Component {
@@ -81,5 +82,9 @@ const mapStateToProps = state => {
   };
 };
 
-
-export default connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toogleAuthModal: () => dispatch(toogleAuthModal())
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

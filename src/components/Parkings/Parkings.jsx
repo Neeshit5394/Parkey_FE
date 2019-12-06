@@ -4,6 +4,7 @@ import LocationSearchInput from "../LocationSearchBar";
 import Map from "../Map";
 import ParkingSpots  from "./ParkingSpot";
 import Styled from "./styled";
+import ReserveSpotModal from "../ReserveSpotModal";
 
 class Parkings extends Component {
   constructor(props) {
@@ -11,6 +12,8 @@ class Parkings extends Component {
   }
   state = {
     hasError: false,
+    show:false,
+    hide:true,
   }
   
   componentDidMount = () => {
@@ -53,6 +56,9 @@ class Parkings extends Component {
           </Styled.Parkings>
 
         </div>
+        <ReserveSpotModal spot={{"description":"description sajdasj"}}
+          show={this.state.show} hide={this.state.hide}
+        />
       </Styled.Wrapper>
     )
   }
