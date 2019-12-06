@@ -14,6 +14,13 @@ class Capsule extends Component {
       hasError: false
     };
   }
+  // componentWillMount(){
+  //   // <script src="https://maps.googleapis.com/maps/api/js?key='%process.env.REACT_MAP_APP_KEY%'&libraries=places"></script>
+  //   const API_KEY = process.env.REACT_MAP_APP_KEY; 
+  //   const script = document.createElement('script'); 
+  //   script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
+  //   document.head.append(script);
+  // }
   render() {
     if (this.state.hasError) {
       return <div>Something went Wrong</div>;

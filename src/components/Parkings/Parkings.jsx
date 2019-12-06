@@ -12,7 +12,7 @@ class Parkings extends Component {
   state = {
     hasError: false,
   }
-
+  
   componentDidMount = () => {
     console.log('Parkings mounted');
   }

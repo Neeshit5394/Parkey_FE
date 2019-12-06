@@ -9,3 +9,7 @@ export {
 export {
     toogleAuthModal,
 } from "./UIActions"
+
+export {
+    setLatLang
+} from "./mapActions"
