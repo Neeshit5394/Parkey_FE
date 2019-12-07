@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom"
 import { Nav } from 'react-bootstrap';
 import Rentings from '../Rentings';
 import UserProfile from '../UserProfile';
+import  Listing  from '../Listing';
 import { connect } from "react-redux";
 //import { getIntakeCalorie, getCurrentDayCalorieIntake, getCurrentWeekCalorieIntake} from "../../store/actions"
 
@@ -20,9 +21,7 @@ class ProfileSection extends Component {
     userProfile:false
   }
   componentDidMount(){
-    //this.props.getIntakeCalorie();
-    //this.props.getCurrentWeekCalorieIntake();
-    //this.props.getCurrentDayCalorieIntake();
+   
 
   }
   handleSelect = eventKey => {
@@ -37,12 +36,11 @@ class ProfileSection extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    //const { auth } = this.props;
-    //if (!auth.uid) return <Redirect to="/" />
     console.log(this.props.auth)
     const dashboard = this.state.dashboard ? <Dashboard /> : null;
-    const rentings = this.state.dietaryPlan ? <Rentings /> : null;
-    //const listings = this.state.calorieTracker ? <Listings /> : null;
+    const rentings = this.state.renting ? <Rentings /> : null;
+    const listing = this.state.listing ?<Listing />  : null;
+    const userProfile = this.state.userProfile ? <UserProfile /> : null;
     return (
       <>
       <Styled.SubNav>
@@ -51,10 +49,10 @@ class ProfileSection extends Component {
             <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="rentings">Rentings</Nav.Link>
+            <Nav.Link eventKey="renting">Rentings</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="listings">Listing</Nav.Link>
+            <Nav.Link eventKey="listing">Listing</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="userProfile">Profile</Nav.Link>
@@ -63,7 +61,8 @@ class ProfileSection extends Component {
         </Styled.SubNav>
         {dashboard}
         {rentings}
-        {UserProfile}
+        {listing}
+        {userProfile}
         <hr/>
         <Styled.footer className="container">
           <div className="footer-desc">

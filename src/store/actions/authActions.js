@@ -77,6 +77,10 @@ export const getAuthStatus = () => dispatch => {
         type: actionTypes.AUTH_STATUS,
         payload: true
       });
+      dispatch({
+        type: actionTypes.SIGN_IN,
+        payload: user
+      });
     } else {
       dispatch({
         type: actionTypes.AUTH_STATUS,
