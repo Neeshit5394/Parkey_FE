@@ -3,6 +3,7 @@ import Styled from "./styled";
 import { Modal, Tabs, Tab } from "react-bootstrap";
 import { toggleReserveSpot } from "../../store/actions/UIActions";
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 class ReserveSpotModal extends Component {
   state = {

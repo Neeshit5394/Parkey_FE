@@ -3,7 +3,6 @@ import Styled from "./styled";
 import Parkings from "../Parkings";
 import LandingPage from "../Landing";
 import ProfileSection from "../ProfileSection";
-import User from "../User";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
