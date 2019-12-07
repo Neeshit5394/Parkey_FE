@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { connect } from "react-redux";
  
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) =>  <div><img height="50px" width="40px" src={require("../../images/mapparkingIcon.png")} /></div>;
  
 class Map extends Component {
   constructor(props){
     super(props);
+    
     this.state= ({
       defaultprops:{
         center:{
@@ -25,16 +27,26 @@ class Map extends Component {
            bootstrapURLKeys={{ key: "" }}
           defaultCenter={this.state.defaultprops.center}
           defaultZoom={this.state.defaultprops.zoom}
+          center={this.props.latLng}
+        zoom={13}
         >
+          
           <AnyReactComponent
-            lat={this.state.defaultprops.center.lat}
-            lng={this.state.defaultprops.center.lng}
-            text="Location"
+            lat={this.props.latLng.lat}
+            lng={this.props.latLng.lng}
+            text={this.props.latLng.lat}
           />
         </GoogleMapReact>
       </div>
     );
   }
 }
- 
-export default Map;
+const mapStateToProps = state => {
+  return {
+    latLng: state.mapState.latLng,
+    
+  };
+};
+
+
+export default connect(mapStateToProps)(Map);

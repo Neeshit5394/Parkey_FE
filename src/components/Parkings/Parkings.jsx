@@ -4,6 +4,8 @@ import LocationSearchInput from "../LocationSearchBar";
 import Map from "../Map";
 import ParkingSpots  from "./ParkingSpot";
 import Styled from "./styled";
+import ReserveSpotModal from "../ReserveSpotModal";
+import { connect } from "react-redux";
 
 class Parkings extends Component {
   constructor(props) {
@@ -11,8 +13,10 @@ class Parkings extends Component {
   }
   state = {
     hasError: false,
+    show:false,
+    hide:true,
   }
-
+  
   componentDidMount = () => {
     console.log('Parkings mounted');
   }
@@ -53,9 +57,17 @@ class Parkings extends Component {
           </Styled.Parkings>
 
         </div>
+        <ReserveSpotModal spot={{"description":"description sajdasj"}}
+          show={this.props.showReserveSpotModal} hide={this.props.showReserveSpotModal}
+        />
       </Styled.Wrapper>
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    showReserveSpotModal: state.uiState.showReserveSpotModal,
+  };
+};
 
-export default withRouter(Parkings);
+export default withRouter(connect(mapStateToProps)(Parkings));

@@ -8,5 +8,9 @@ export {
 } from "./authActions"
 
 export {
-    toggleAuthModal,
+    toogleAuthModal,
 } from "./UIActions"
+
+export {
+    setLatLang
+} from "./mapActions"

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Styled from "./styled";
-import firebase from "./../../Firebase";
-
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import Parkings from "../Parkings";
+import LandingPage from "../Landing";
+import ProfileSection from "../ProfileSection";
+import User from "../User";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
+import { toogleAuthModal } from "../../store/actions";
 import SignOutLinks from "./SignOutLinks";
 import { toggleAuthModal, getAuthStatus } from "./../../store/actions";
 class NavBar extends Component {
@@ -41,6 +44,11 @@ class NavBar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/ProfileSection">
+                    <Styled.navlink className="nav-link">User</Styled.navlink>
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link to="/">
                     <Styled.navlink className="nav-link">Find</Styled.navlink>
                   </Link>
@@ -68,6 +76,12 @@ class NavBar extends Component {
             </div>
             {authLink}
           </nav>
+          <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/user" component={User} />
+              <Route path="/Parkings/:id" component={Parkings} />
+              <Route path="/ProfileSection" component={ProfileSection}/>
+            </Switch>
         </Router>
         <Authentication
           show={this.props.showAuthModal}
@@ -87,6 +101,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { toggleAuthModal, getAuthStatus })(
-  NavBar
-);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toogleAuthModal: () => dispatch(toogleAuthModal())
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
