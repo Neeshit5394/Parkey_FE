@@ -283,10 +283,10 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    updatePassword: (oldPassword, newPassword, email) => dispatch(actionCreators.updatePassword(oldPassword, newPassword, email)),
-    resetUpdatePasswordFlag: () => dispatch(actionCreators.resetUpdatePasswordFlag()),
-    updateUserDetail: (userDetail) => dispatch(actionCreators.updateUserDetail(userDetail)),
-    resetUserDetailUpdateFlag: () => dispatch(actionCreators.resetUserDetailUpdateFlag()),
+    // updatePassword: (oldPassword, newPassword, email) => dispatch(actionCreators.updatePassword(oldPassword, newPassword, email)),
+    // resetUpdatePasswordFlag: () => dispatch(actionCreators.resetUpdatePasswordFlag()),
+    // updateUserDetail: (userDetail) => dispatch(actionCreators.updateUserDetail(userDetail)),
+    // //resetUserDetailUpdateFlag: () => dispatch(actionCreators.resetUserDetailUpdateFlag()),
 
   };
 }

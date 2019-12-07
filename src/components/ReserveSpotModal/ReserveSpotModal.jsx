@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Styled from "./styled";
 import { Modal, Tabs, Tab } from "react-bootstrap";
-
+import { toggleReserveSpot } from "../../store/actions/UIActions";
+import { connect } from "react-redux";
 
 class ReserveSpotModal extends Component {
   state = {
@@ -17,7 +18,7 @@ class ReserveSpotModal extends Component {
         <Modal
           dialogClassName="custom-modal"
           show={this.props.show}
-          onHide={this.props.onHide}
+          onHide={()=>this.props.toggleReserveSpot()}
           animation={true}
         >
           <Styled.ModalHeader closeButton>
@@ -32,7 +33,7 @@ class ReserveSpotModal extends Component {
             <p>Automatic Data Processing FCU Branch Location at 1 ADP Blvd, Roseland, NJ 07068 - Hours of Operation, Phone Number, Services, Routing Numbers</p>
             <h3 className="display-4 heading-3">Availability</h3>
             <p> To check if the service is available in your area (or an area you might be traveling), use the city checker tool on the Uber website. You can also download the Uber app and setup an account. The app itself will notify you whether or not the service is available.</p>
-            <p><span class="spot-available-time-box">4 hrs</span></p>
+            <p><span className="spot-available-time-box">4 hrs</span></p>
             </Modal.Body>
           
           </Styled.ModalBody>
@@ -46,5 +47,13 @@ class ReserveSpotModal extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleReserveSpot: () => dispatch(toggleReserveSpot())
+  };
+}
+export default connect(null, mapDispatchToProps)(ReserveSpotModal);
 
-export default ReserveSpotModal;
+
+// export default ReserveSpotModal;
+

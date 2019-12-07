@@ -5,6 +5,7 @@ import Map from "../Map";
 import ParkingSpots  from "./ParkingSpot";
 import Styled from "./styled";
 import ReserveSpotModal from "../ReserveSpotModal";
+import { connect } from "react-redux";
 
 class Parkings extends Component {
   constructor(props) {
@@ -57,11 +58,16 @@ class Parkings extends Component {
 
         </div>
         <ReserveSpotModal spot={{"description":"description sajdasj"}}
-          show={this.state.show} hide={this.state.hide}
+          show={this.props.showReserveSpotModal} hide={this.props.showReserveSpotModal}
         />
       </Styled.Wrapper>
     )
   }
 }
+const mapStateToProps = state => {
+  return {
+    showReserveSpotModal: state.uiState.showReserveSpotModal,
+  };
+};
 
-export default withRouter(Parkings);
+export default withRouter(connect(mapStateToProps)(Parkings));

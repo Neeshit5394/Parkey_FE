@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Styled from "./styled";
+import { toggleReserveSpot } from "../../../store/actions/UIActions";
+import { connect } from "react-redux";
 
 class ParkingSpot extends Component {
   constructor(props) {
@@ -26,11 +28,15 @@ class ParkingSpot extends Component {
           <p>{this.props.description}</p>
         </div>
         <div className="footer">
-          <button type="button" className="btn btn-primary btn-md ">Reserve Spot</button>
+          <button type="button" className="btn btn-primary btn-md" onClick={()=>this.props.toggleReserveSpot()}>Reserve Spot</button>
         </div>
       </Styled.ParkingSpot>
     );
   }
 }
-
-export default ParkingSpot;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleReserveSpot: () => dispatch(toggleReserveSpot())
+  };
+}
+export default connect(null, mapDispatchToProps)(ParkingSpot);
