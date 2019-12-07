@@ -3,14 +3,21 @@ import Styled from "./styled";
 import Parkings from "../Parkings";
 import LandingPage from "../Landing";
 import ProfileSection from "../ProfileSection";
-import User from "../User";
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+// import User from "../User";
+import {
+  BrowserRouter as Router,
+  Link,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
 // import { toogleAuthModal } from "../../store/actions";
 import SignOutLinks from "./SignOutLinks";
 import { toggleAuthModal, getAuthStatus } from "./../../store/actions";
+import UserProfile from "../UserProfile";
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -78,12 +85,10 @@ class NavBar extends Component {
           </nav>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            {/* <Route path="/user" component={User} /> */}
+            <Route path="/user">
+              {this.props.authStatus ? <ProfileSection /> : <Redirect to="/" />}
+            </Route>
             <Route path="/Parkings/:id" component={Parkings} />
-            <Route
-              path="/user"
-              component={this.props.authStatus ? ProfileSection : null}
-            />
           </Switch>
         </Router>
         <Authentication
