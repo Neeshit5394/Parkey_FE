@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const container = styled.div`
     padding:30px;
-    // font-family: 'Comfortaa', cursive;
+    font-family: 'Comfortaa', cursive;
     .chart{
         box-shadow:1px 0px 5px 0px;
         padding:40px;
