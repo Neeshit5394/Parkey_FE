@@ -16,10 +16,7 @@ class Rentings extends Component {
     return (
       <Styled.Container>
         <div className="row">
-
           <div className="col-sm-8 col-lg-8 col-md-8">
-
-
             <div className="row">
               <div className="col-sm-6 col-lg-6 col-md-6 card-view">
                 <Card className="breakfast-card card-body">
