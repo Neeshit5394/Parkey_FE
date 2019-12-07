@@ -91,7 +91,6 @@ class Listing extends Component {
               {previousListings}
             </Accordion>
             </div>
-           
           </div>
           <div className="col-sm-12 col-lg-5 col-md-5">
             <h2 className="display-4">Post Parking</h2><hr />
