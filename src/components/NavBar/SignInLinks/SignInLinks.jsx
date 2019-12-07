@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Styled from "./styled";
 import { Link } from "react-router-dom";
-import { toggleAuthModal } from "../../../store/actions";
+import { toggleAuthModal } from "./../../../store/actions";
 import { connect } from "react-redux";
 
 class SignInLinks extends Component {

@@ -117,7 +117,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     authError: state.authState.authError,
-    authStatus: state.authStatus
+    authStatus: state.authState.authStatus
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);

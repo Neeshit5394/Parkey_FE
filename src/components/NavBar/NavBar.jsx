@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
-import { toogleAuthModal } from "../../store/actions";
+// import { toogleAuthModal } from "../../store/actions";
 import SignOutLinks from "./SignOutLinks";
 import { toggleAuthModal, getAuthStatus } from "./../../store/actions";
 class NavBar extends Component {
@@ -43,11 +43,11 @@ class NavBar extends Component {
                     <Styled.navlink className="nav-link">Rent</Styled.navlink>
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/ProfileSection">
+                {/* <li className="nav-item">
+                  <Link to="/user">
                     <Styled.navlink className="nav-link">User</Styled.navlink>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link to="/">
                     <Styled.navlink className="nav-link">Find</Styled.navlink>
@@ -77,11 +77,14 @@ class NavBar extends Component {
             {authLink}
           </nav>
           <Switch>
-              <Route path="/" exact component={LandingPage} />
-              <Route path="/user" component={User} />
-              <Route path="/Parkings/:id" component={Parkings} />
-              <Route path="/ProfileSection" component={ProfileSection}/>
-            </Switch>
+            <Route path="/" exact component={LandingPage} />
+            {/* <Route path="/user" component={User} /> */}
+            <Route path="/Parkings/:id" component={Parkings} />
+            <Route
+              path="/user"
+              component={this.props.authStatus ? ProfileSection : null}
+            />
+          </Switch>
         </Router>
         <Authentication
           show={this.props.showAuthModal}
@@ -101,9 +104,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toogleAuthModal: () => dispatch(toogleAuthModal())
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+const mapActionstoProps = {
+  toggleAuthModal,
+  getAuthStatus
+};
+
+export default connect(mapStateToProps, mapActionstoProps)(NavBar);
