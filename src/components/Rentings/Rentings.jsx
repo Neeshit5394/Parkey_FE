@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Styled from "./styled";
 import Cards from "./Cards"
-import { Card } from "react-bootstrap";
 import PreviousRentingCard from './PreviousRentingCard/PreviousRentingCard';
+import { connect } from "react-redux";
+import { endReservation} from "./../../store/actions";
 
 class Rentings extends Component {
 
@@ -14,38 +15,10 @@ class Rentings extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    const dummyActiveRenting = [
-      {
-        "description":"Some quick example text to build on the card title and make up the bulk of the card's content. dsjdsk jksdfhkds sjdhfkds dsjkhk ds dshfjdsk dsjhdsbf sdfhdskjh sdkjhfkds kjhdsk dsjkfd jkhdsf fjhjdsk jkhk dskjbkfjds sdkjhfkds. Some quick example text to build on the card title and make up the bulk of the card's content. dsjdsk jksdfhkds sjdhfkds dsjkhk ds dshfjdsk dsjhdsbf",
-        "price":2,
-        "rent_start_date":"12 Jan 2019",
-        "rent_end_date":"15 Jan 2019",
-        "location":"129 South Street"
-      },
-    ]
-    const dummyInActiveRenting = [
-      {
-        "description":"Some quick example text to build on the card title and make up the bulk of the card's content. dsjdsk jksdfhkds sjdhfkds dsjkhk ds dshfjdsk dsjhdsbf sdfhdskjh sdkjhfkds kjhdsk dsjkfd jkhdsf fjhjdsk jkhk dskjbkfjds sdkjhfkds. Some quick example text to build on the card title and make up the bulk of the card's content. dsjdsk jksdfhkds sjdhfkds dsjkhk ds dshfjdsk dsjhdsbf",
-        "price":2,
-        "rent_start_date":"12 Jan 2019",
-        "rent_end_date":"15 Jan 2019",
-        "billed_amount":200,
-        "location":"129 South Street"
-      },
-      {
-        "description":"Somedafsdfjdsfdsjbjkdsfkjds jdfhjds kdjfdsj he bulk of the card's content. dsjdsk jksdfhkds sjdhfkds dsjkhk ds dshfjdsk dsjhdsbf sdfhdskjh sdkjhfkds kjhdsk dsjkfd jkhdsf fjhjdsk jkhk dskjbkfjds sdkjhfkds. Some quick example text to build on the card title and make up the bulk of the card's content. dsjdsk jksdfhkds sjdhfkds dsjkhk ds dshfjdsk dsjhdsbf",
-        "price":5,
-        "rent_start_date":"12 Jan 2019",
-        "rent_end_date":"15 Jan 2019",
-        "billed_amount":500,
-        "location":"135 Cambridge Avenue"
-
-      },
-    ]
-    let activeRentings = dummyActiveRenting.map((item,idx)=>{
+    let activeRentings = this.props.activeRentings.map((item,idx)=>{
      return <Cards key={idx} rentingDetail={item} />
     })
-    let inActiveRentings = dummyInActiveRenting.map((item,idx)=>{
+    let inActiveRentings = this.props.recentRentings.map((item,idx)=>{
       return <PreviousRentingCard key={idx} rentingDetail={item} />
     })
     return (
@@ -53,16 +26,26 @@ class Rentings extends Component {
         <div className="rentings">
           <h2>Active Rentings</h2>
           <hr width="70%" align="left" />
-         {activeRentings}
+         {activeRentings.length==0?<p>No Active Rentings</p>:activeRentings}
         </div>
         <div className="rentings">
           <h2>Recent Rentings</h2>
           <hr width="80%" align="left" />
-          {inActiveRentings}
+          {inActiveRentings.length==0?<p>No recent Rentings</p>:inActiveRentings}
         </div>
       </Styled.Container>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    activeRentings:state.rentingState.activeRentings,
+    recentRentings:state.rentingState.recentRentings
+  };
+};
 
-export default Rentings;
+// const mapActionstoProps = {
+//   endReservation
+// };
+
+export default connect(mapStateToProps)(Rentings);

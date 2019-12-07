@@ -14,3 +14,7 @@ export {
 export {
     setLatLang
 } from "./mapActions"
+
+export {
+    endReservation
+} from "./rentingAction"
