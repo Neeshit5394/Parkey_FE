@@ -26,7 +26,7 @@ export const signIn = cred => async dispatch => {
     });
   }
 };
-export const signUp = (cred) => async dispatch => {
+export const signUp = cred => async dispatch => {
   try {
     const { user } = await firebase
       .auth()
@@ -34,13 +34,21 @@ export const signUp = (cred) => async dispatch => {
     // To do :write an Api calling for updating user database in MongoDb
     if (user) {
       // console.log(cred);
-      await axios.post("http://localhost:8080/users", {
-        firstName: cred.firstName,
-        lastName: cred.lastName,
-        email: user.email,
-        phnumber: Number(cred.phnumber),
-        id: user.uid
-      });
+      await axios.post(
+        "http://localhost:8080/users",
+        {
+          firstName: cred.firstName,
+          lastName: cred.lastName,
+          email: user.email,
+          phnumber: Number(cred.phnumber),
+          id: user.uid
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-urlencoded"
+          }
+        }
+      );
     } else {
       console.log("error");
     }
