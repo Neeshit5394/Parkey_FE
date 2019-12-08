@@ -1,4 +1,5 @@
 import firebase from "../../Firebase";
+import axios from "axios";
 import * as actionTypes from "./actionTypes";
 
 export const signIn = cred => async dispatch => {
@@ -25,13 +26,23 @@ export const signIn = cred => async dispatch => {
     });
   }
 };
-export const signUp = cred => async dispatch => {
+export const signUp = (cred, firstName, lastName) => async dispatch => {
   try {
     const { user } = await firebase
       .auth()
       .createUserWithEmailAndPassword(cred.email, cred.password);
     // To do :write an Api calling for updating user database in MongoDb
-
+    if (user) {
+      // console.log(cred);
+      await axios.post("http://localhost:8080/users", {
+        name: `${cred.firstName} ${cred.lastName}`,
+        email: user.email,
+        phnumber: Number(cred.phnumber),
+        id: user.uid
+      });
+    } else {
+      console.log("error");
+    }
     dispatch({
       type: actionTypes.SIGN_UP,
       payload: user
@@ -40,6 +51,7 @@ export const signUp = cred => async dispatch => {
       type: actionTypes.TOGGLE_AUTH_MODEL
     });
   } catch (e) {
+    console.log(e);
     dispatch({
       type: actionTypes.AUTH_ERROR,
       payload: e.code
@@ -47,7 +59,7 @@ export const signUp = cred => async dispatch => {
   }
 };
 
-export const signOut = () => async dispatch => {
+export const signOut = () => dispatch => {
   firebase
     .auth()
     .signOut()
@@ -88,4 +100,15 @@ export const getAuthStatus = () => dispatch => {
       });
     }
   });
+};
+export const updatePhoneNumber = async (id, newNumber) => {
+  console.log(id);
+  console.log(newNumber);
+  try {
+    await axios.patch(`http://localhost:8080/users/${id}`, {
+      phnumber: newNumber
+    });
+  } catch {
+    console.log("an error ocurred");
+  }
 };

@@ -1,16 +1,12 @@
-
 export {
-    signIn,
-    signUp,
-    resetErrorFlag,
-    signOut,
-    getAuthStatus
-} from "./authActions"
+  signIn,
+  signUp,
+  resetErrorFlag,
+  signOut,
+  getAuthStatus,
+  updatePhoneNumber
+} from "./authActions";
 
-export {
-    toggleAuthModal,
-} from "./UIActions"
+export { toggleAuthModal } from "./UIActions";
 
-export {
-    setLatLang
-} from "./mapActions"
+export { setLatLang } from "./mapActions";

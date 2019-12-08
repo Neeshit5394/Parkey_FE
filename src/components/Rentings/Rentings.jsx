@@ -14,7 +14,7 @@ class Rentings extends Component {
     return (
       <Styled.Container>
         <Card className="card">
-          <Card.Header>Featured</Card.Header>
+          <Card.Header>Active Parking</Card.Header>
           <Card.Body>
             <Card.Title>Special title treatment</Card.Title>
             <Card.Text>

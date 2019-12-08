@@ -4,9 +4,7 @@ import Styled from "./styled";
 import { connect } from "react-redux";
 import { signUp, resetErrorFlag } from "./../../../store/actions";
 
-
 class Signup extends Component {
-
   state = {
     hasError: false,
     email: "",
@@ -14,95 +12,131 @@ class Signup extends Component {
     confirmPassword: "",
     error: "",
     visible: false,
-    firstName:"",
-    lastName:"",
+    firstName: "",
+    lastName: "",
+    phnumber: ""
   };
   onShowAlert = () => {
     this.setState({ ...this.state, visible: true }, () => {
       window.setTimeout(() => {
-        this.setState({ ...this.state, visible: false })
-      }, 5000)
+        this.setState({ ...this.state, visible: false });
+      }, 5000);
     });
-  }
+  };
 
   componentDidUpdate() {
-
     if (this.props.authError != null) {
       this.onShowAlert();
       this.setState({
-        error: this.props.authError,
-      })
+        error: this.props.authError
+      });
       this.props.resetErrorFlag();
     }
-
   }
 
-  handleOnChange = (e) => {
+  handleOnChange = e => {
     this.handleOnChange.bind(this);
     this.setState({
       [e.target.id]: e.target.value,
       error: ""
-    })
-  }
-  handleOnSubmit = (e) => {
-    e.preventDefault()
-    if (!this.state.email || this.state.email == null || this.state.email == undefined) {
+    });
+  };
+  handleOnSubmit = e => {
+    e.preventDefault();
+    if (
+      !this.state.email ||
+      this.state.email == null ||
+      this.state.email == undefined
+    ) {
       this.setState({
         ...this.state,
-        error: "Please enter Email",
-      })
-      this.onShowAlert()
+        error: "Please enter Email"
+      });
+      this.onShowAlert();
       return this.state.error;
     }
-    if (!this.state.password || this.state.password == null || this.state.password == undefined) {
+    if (
+      !this.state.password ||
+      this.state.password == null ||
+      this.state.password == undefined
+    ) {
       this.setState({
         ...this.state,
-        error: "Please enter password",
-      })
-      this.onShowAlert()
+        error: "Please enter password"
+      });
+      this.onShowAlert();
       return this.state.error;
     }
-    if (!this.state.confirmPassword || this.state.confirmPassword == null || this.state.confirmPassword == undefined) {
+    if (
+      !this.state.confirmPassword ||
+      this.state.confirmPassword == null ||
+      this.state.confirmPassword == undefined
+    ) {
       this.setState({
         ...this.state,
-        error: "Please enter confirm password",
-      })
-      this.onShowAlert()
+        error: "Please enter confirm password"
+      });
+      this.onShowAlert();
       return this.state.error;
     }
-    if (!this.state.lastName || this.state.lastName == null || this.state.lastName == undefined) {
+    if (
+      !this.state.lastName ||
+      this.state.lastName == null ||
+      this.state.lastName == undefined
+    ) {
       this.setState({
         ...this.state,
-        error: "Please enter Last Name",
-      })
-      this.onShowAlert()
+        error: "Please enter Last Name"
+      });
+      this.onShowAlert();
       return this.state.error;
     }
-    if (!this.state.firstName || this.state.firstName == null || this.state.firstName == undefined) {
+    if (
+      !this.state.firstName ||
+      this.state.firstName == null ||
+      this.state.firstName == undefined
+    ) {
       this.setState({
         ...this.state,
-        error: "Please enter first name",
-      })
-      this.onShowAlert()
+        error: "Please enter first name"
+      });
+      this.onShowAlert();
       return this.state.error;
     }
     if (this.state.password !== this.state.confirmPassword) {
       this.setState({
         ...this.state,
-        error: "Password and confirm Password does not match",
-      })
-      this.onShowAlert()
+        error: "Password and confirm Password does not match"
+      });
+      this.onShowAlert();
       return this.state.error;
-    }
-    else {
-      this.props.signUp({ email: this.state.email, password: this.state.password , firstName: this.state.firstName, lastName: this.state.lastName});
+    } else {
+      this.props.signUp({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        phnumber: this.state.phnumber
+      });
       this.setState({
         email: "",
         password: "",
-        confirmPassword: "",
-      })
+        confirmPassword: ""
+      });
     }
-  }
+    if (
+      !this.state.phnumber ||
+      this.state.phnumber == null ||
+      this.state.phnumber == undefined
+    ) {
+      this.setState({
+        ...this.state,
+        error: "Please enter phone number"
+      });
+      this.onShowAlert();
+      return this.state.error;
+    }
+  };
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
@@ -134,10 +168,20 @@ class Signup extends Component {
             </div>
             <div className="col-sm-12 col-lg-6 col-md-6">
               <Form.Group controlId="confirmPassword">
-                <Form.Control type="password" value={this.state.confirmPassword} placeholder="Confirm Password" onChange={this.handleOnChange} />
+                <Form.Control
+                  type="password"
+                  value={this.state.confirmPassword}
+                  placeholder="Confirm Password"
+                  onChange={this.handleOnChange}
+                />
               </Form.Group>
             </div>
           </div>
+          {/* <div>
+            <Styled.FormText>
+              At least 8 Characters and alphanumeric
+            </Styled.FormText>
+          </div> */}
           <div className="row">
             <div className="col-sm-12 col-lg-6 col-md-6">
               <Form.Group controlId="firstName">
@@ -151,19 +195,24 @@ class Signup extends Component {
             </div>
             <div className="col-sm-12 col-lg-6 col-md-6">
               <Form.Group controlId="lastName">
-                <Form.Control type="text" value={this.state.lastName} placeholder="Last Name" onChange={this.handleOnChange} />
+                <Form.Control
+                  type="text"
+                  value={this.state.lastName}
+                  placeholder="Last Name"
+                  onChange={this.handleOnChange}
+                />
               </Form.Group>
             </div>
           </div>
-          <Styled.FormText>
-            At least 8 Characters and alphanumeric
-          </Styled.FormText>
-          <Button
-            variant="primary"
-            size="md"
-            type="submit"
-            block
-          >
+          <Form.Group controlId="phnumber">
+            <Form.Control
+              type="tel"
+              placeholder="Enter phone number"
+              value={this.state.phnumber}
+              onChange={this.handleOnChange}
+            />
+          </Form.Group>
+          <Button variant="primary" size="md" type="submit" block>
             Submit
           </Button>
         </Form>
@@ -175,12 +224,10 @@ class Signup extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signUp: (creds) => dispatch(signUp(creds)),
-    resetErrorFlag: () => dispatch(resetErrorFlag())
-  };
-}
+const mapActionsToProps = {
+  signUp,
+  resetErrorFlag
+};
 
 const mapStateToProps = state => {
   return {
@@ -188,4 +235,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapActionsToProps)(Signup);
