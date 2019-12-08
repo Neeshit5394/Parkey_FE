@@ -10,7 +10,8 @@ export {
 export { toggleAuthModal } from "./UIActions";
 
 export {
-    setLatLang
+    setLatLang,
+    getListing
 } from "./mapActions"
 
 export {

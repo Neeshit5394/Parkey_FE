@@ -25,6 +25,9 @@ class Parkings extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
+    const rentings = this.props.allRentings.map((item)=>{
+      return <ParkingSpots parkingSpot={item}/>
+    })
     return (
       <Styled.Wrapper className="jumbotron">
         <Styled.MenuWrapper>
@@ -50,16 +53,18 @@ class Parkings extends Component {
             </Styled.MapContainer>
           
           <Styled.Parkings className="col-sm-12 col-md-4 col-lg-4 fixed-content">
-            <ParkingSpots title="Gurdwara Temple Parking" description="Parking hours between 2 AM to 8 PM " />
+            {/* <ParkingSpots title="Gurdwara Temple Parking" description="Parking hours between 2 AM to 8 PM " />
             <ParkingSpots title="DMart Parking" description="Parking hours between 2 PM to 3 PM" />
             <ParkingSpots title="Apna Bazar Parking" description="Parking hours between 1 PM to 6 PM" />
-            <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" />
+            <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" /> */}
+            {rentings}
           </Styled.Parkings>
 
         </div>
-        <ReserveSpotModal spot={{"description":"description sajdasj"}}
+        {this.props.reserveSpotModalData!=null?<ReserveSpotModal spot={this.props.reserveSpotModalData}
           show={this.props.showReserveSpotModal} hide={this.props.showReserveSpotModal}
-        />
+        />:null}
+        
       </Styled.Wrapper>
     )
   }
@@ -67,6 +72,8 @@ class Parkings extends Component {
 const mapStateToProps = state => {
   return {
     showReserveSpotModal: state.uiState.showReserveSpotModal,
+    allRentings:state.mapState.allRentings,
+    reserveSpotModalData:state.uiState.reserveSpotModalData,
   };
 };
 
