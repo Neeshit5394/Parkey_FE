@@ -7,6 +7,7 @@ import {
 const intialState = {
     showAuthModal: false,
     showReserveSpotModal:false,
+    reserveSpotModalData:null,
 };
 
 export default (state = intialState, action) => {
@@ -20,6 +21,7 @@ export default (state = intialState, action) => {
         case actionTypes.TOGGLE_RESERVE_SPOT_MODAL:
             return updatedObject(state, {
                 showReserveSpotModal:!state.showReserveSpotModal,
+                reserveSpotModalData:action.payload,
             })
 
         default:

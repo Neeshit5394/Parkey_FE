@@ -31,7 +31,11 @@ const ModalBody = styled(Modal.Body)`
     color:#082937;
     padding-bottom:2px;
     .heading-3{
-        font-size:25px;
+        font-size:18px;
+    }
+    .termsCondition{
+        padding-top:5px;
+        font-size:10px;
     }
     .spot-available-time-box{
         padding:5px 15px 5px 15px;

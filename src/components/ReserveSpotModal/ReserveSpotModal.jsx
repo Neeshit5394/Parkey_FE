@@ -19,28 +19,41 @@ class ReserveSpotModal extends Component {
         <Modal
           dialogClassName="custom-modal"
           show={this.props.show}
-          onHide={()=>this.props.toggleReserveSpot()}
+          onHide={() => this.props.toggleReserveSpot()}
           animation={true}
         >
           <Styled.ModalHeader closeButton>
             <Modal.Title>
               <h1 className="display-4  heading-1">Reserve Spot</h1>
-              <h2 className="display-4 heading-2">129 South Street, NJ, USA</h2>
+              <h2 className="display-4 heading-2">{this.props.spot.locationName}</h2>
             </Modal.Title>
           </Styled.ModalHeader>
           <Styled.ModalBody>
             <Modal.Body>
-            <h3 className="display-4 heading-3">Description</h3>
-            <p>Automatic Data Processing FCU Branch Location at 1 ADP Blvd, Roseland, NJ 07068 - Hours of Operation, Phone Number, Services, Routing Numbers</p>
-            <h3 className="display-4 heading-3">Availability</h3>
-            <p> To check if the service is available in your area (or an area you might be traveling), use the city checker tool on the Uber website. You can also download the Uber app and setup an account. The app itself will notify you whether or not the service is available.</p>
-            <p><span className="spot-available-time-box">4 hrs</span></p>
+              <h3 className="display-4 heading-3">Description</h3>
+              <p>{this.props.spot.details}</p>
+              <div className="row">
+                <div className="col-sm-12 col-lg-4 col-md-4">
+                  <h3 className="display-4 heading-3">Start Time</h3>
+                  <p>{new Date(this.props.spot.startTime).toDateString()}</p>
+                </div>
+                <div className="col-sm-12 col-lg-4 col-md-4">
+                  <h3 className="display-4 heading-3">End Time</h3>
+                  <p>{new Date(this.props.spot.endTime).toDateString()}</p>
+                </div>
+                <div className="col-sm-12 col-lg-4 col-md-4">
+                  <h3 className="display-4 heading-3">Price</h3>
+                  <p>{this.props.spot.price} $</p>
+                </div>
+              </div>
+              <p className="termsCondition">*By clicking on the Reserve Spot you will be charged according to the above rates</p>
+              {/* <p><span className="spot-available-time-box">4 hrs</span></p> */}
             </Modal.Body>
-          
+
           </Styled.ModalBody>
           <Modal.Footer>
             <Styled.Footer>
-            <button type="button" className="btn btn-primary btn-md ">Reserve Now</button>
+              <button type="button" className="btn btn-primary btn-md ">Reserve Now</button>
             </Styled.Footer>
           </Modal.Footer>
         </Modal>

@@ -13,8 +13,9 @@ const SearchBar = styled.input`
 const suggestionContainer = styled.div`
     position: absolute 
     z-index: 1051 !important;
-    width:100%:
-    margin:0 30px 0 20px;
+   
+    //margin:0 30px 0 20px;
+    width:54.5%;
 `
 ;
 

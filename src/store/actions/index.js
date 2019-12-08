@@ -12,7 +12,8 @@ export {
 } from "./UIActions"
 
 export {
-    setLatLang
+    setLatLang,
+    getListing
 } from "./mapActions"
 
 export {
