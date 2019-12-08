@@ -11,11 +11,11 @@ import { connect } from "react-redux";
 
 class ProfileSection extends Component {
   state = {
-    activeKey: "dashboard",
-    dashboard:true,
+    activeKey: "userProfile",
+    userProfile:true,
   }
   clearState= {
-    dashboard:false,
+    // dashboard:false,
     renting:false,
     listing:false,
     userProfile:false
@@ -37,7 +37,7 @@ class ProfileSection extends Component {
       return <h1>Something went wrong.</h1>;
     }
     console.log(this.props.auth)
-    const dashboard = this.state.dashboard ? <Dashboard /> : null;
+    // const dashboard = this.state.dashboard ? <Dashboard /> : null;
     const rentings = this.state.renting ? <Rentings /> : null;
     const listing = this.state.listing ?<Listing />  : null;
     const userProfile = this.state.userProfile ? <UserProfile /> : null;
@@ -45,8 +45,11 @@ class ProfileSection extends Component {
       <>
       <Styled.SubNav>
         <Nav className="justify-content-center"  activeKey={this.state.activeKey} onSelect={this.handleSelect}>
-          <Nav.Item >
+          {/* <Nav.Item >
             <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
+          </Nav.Item> */}
+           <Nav.Item>
+            <Nav.Link eventKey="userProfile">Profile</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="renting">Rentings</Nav.Link>
@@ -54,12 +57,10 @@ class ProfileSection extends Component {
           <Nav.Item>
             <Nav.Link eventKey="listing">Listing</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="userProfile">Profile</Nav.Link>
-          </Nav.Item>
+         
         </Nav>
         </Styled.SubNav>
-        {dashboard}
+        {/* {dashboard} */}
         {rentings}
         {listing}
         {userProfile}
