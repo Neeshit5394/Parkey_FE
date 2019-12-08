@@ -26,7 +26,7 @@ export const signIn = cred => async dispatch => {
     });
   }
 };
-export const signUp = (cred, firstName, lastName) => async dispatch => {
+export const signUp = (cred) => async dispatch => {
   try {
     const { user } = await firebase
       .auth()
@@ -35,7 +35,8 @@ export const signUp = (cred, firstName, lastName) => async dispatch => {
     if (user) {
       // console.log(cred);
       await axios.post("http://localhost:8080/users", {
-        name: `${cred.firstName} ${cred.lastName}`,
+        firstName: cred.firstName,
+        lastName: cred.lastName,
         email: user.email,
         phnumber: Number(cred.phnumber),
         id: user.uid
