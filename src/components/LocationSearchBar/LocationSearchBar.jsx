@@ -77,6 +77,7 @@ class LocationSearchBar extends React.Component {
             <Styled.suggestionContainer className="autocomplete-dropdown-container ">
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {  // changed for demo purpose
+              // console.log
                 const className = suggestion.active
                   ? 'suggestion-item--active'
                   : 'suggestion-item';

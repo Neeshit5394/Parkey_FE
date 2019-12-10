@@ -9,11 +9,6 @@ export {
 
 export { toggleAuthModal } from "./UIActions";
 
-export {
-    setLatLang,
-    getListing
-} from "./mapActions"
+export { setLatLang, getListing, selectAddress } from "./mapActions";
 
-export {
-    endReservation
-} from "./rentingAction"
+export { endReservation } from "./rentingAction";

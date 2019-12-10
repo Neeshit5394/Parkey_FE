@@ -32,23 +32,16 @@ export const signUp = cred => async dispatch => {
       .auth()
       .createUserWithEmailAndPassword(cred.email, cred.password);
     // To do :write an Api calling for updating user database in MongoDb
+    // console.log(firebase.auth().currentUser.getIdToken());
     if (user) {
       // console.log(cred);
-      await axios.post(
-        "http://localhost:8080/users",
-        {
-          firstName: cred.firstName,
-          lastName: cred.lastName,
-          email: user.email,
-          phnumber: Number(cred.phnumber),
-          id: user.uid
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-urlencoded"
-          }
-        }
-      );
+      await axios.post("http://localhost:8080/users", {
+        firstName: cred.firstName,
+        lastName: cred.lastName,
+        email: user.email,
+        phnumber: Number(cred.phnumber),
+        id: user.uid
+      });
     } else {
       console.log("error");
     }
