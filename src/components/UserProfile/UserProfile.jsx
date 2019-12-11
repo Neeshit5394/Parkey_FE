@@ -9,24 +9,10 @@ class UserProfile extends Component {
     super(props);
     this.state = {
       hasError: false,
-      email: "",
-      phoneNumber: null,
-      firstName: "",
-      lastName: "",
       visible: false,
-      oldPassword: "",
-      newPassword: "",
-      confirmPassword: "",
       erro: "",
       dangerVisibility: false
     };
-  }
-  componentDidMount() {
-    this.setState({
-      firstName: this.props.firstName,
-      lastName: this.props.lastName,
-      email: this.props.email
-    });
   }
   onShowAlert = () => {
     this.setState({
@@ -136,7 +122,7 @@ class UserProfile extends Component {
               <Form.Control
                 plaintext
                 readOnly
-                value={this.state.firstName || "Amit"}
+                value={this.props.userData.firstName || ""}
               />
             </Col>
           </Form.Group>
@@ -148,7 +134,7 @@ class UserProfile extends Component {
               <Form.Control
                 plaintext
                 readOnly
-                value={this.state.lastName || "Vadnere"}
+                value={this.props.userData.lastName || ""}
               />
             </Col>
           </Form.Group>
@@ -170,11 +156,7 @@ class UserProfile extends Component {
               Email
             </Form.Label>
             <Col sm="8">
-              <Form.Control
-                plaintext
-                readOnly
-                value={this.state.email || "avadnere@stevens.edu"}
-              />
+              <Form.Control plaintext readOnly value={this.props.userData.email || ""} />
             </Col>
           </Form.Group>
 
@@ -228,7 +210,7 @@ class UserProfile extends Component {
 }
 const mapStateToProps = state => {
   return {
-    profile: state.authState.profile
+    userData: state.authState.userData
   };
 };
 

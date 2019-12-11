@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
 // import { toogleAuthModal } from "../../store/actions";
 import SignOutLinks from "./SignOutLinks";
-import { toggleAuthModal, getAuthStatus } from "./../../store/actions";
+import { toggleAuthModal, getCurrentUser } from "./../../store/actions";
 import UserProfile from "../UserProfile";
 class NavBar extends Component {
   constructor(props) {
@@ -26,14 +26,15 @@ class NavBar extends Component {
     };
   }
   componentDidMount() {
-    this.props.getAuthStatus();
+    this.props.getCurrentUser();
   }
 
   render() {
+    // console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    let authLink = this.props.authStatus ? <SignOutLinks /> : <SignInLinks />;
+    let authLink = this.props.currentUser ? <SignOutLinks /> : <SignInLinks />;
     return (
       <div>
         <Router>
@@ -86,7 +87,11 @@ class NavBar extends Component {
           <Switch>
             <Route path="/" exact component={LandingPage} />
             <Route path="/user">
-              {this.props.authStatus ? <ProfileSection /> : <Redirect to="/" />}
+              {this.props.currentUser ? (
+                <ProfileSection />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
             <Route path="/Parkings/:id" component={Parkings} />
           </Switch>
@@ -104,14 +109,13 @@ class NavBar extends Component {
 const mapStateToProps = state => {
   return {
     showAuthModal: state.uiState.showAuthModal,
-    profile: state.authState.profile,
-    authStatus: state.authState.authStatus
+    currentUser: state.authState.currentUser
   };
 };
 
 const mapActionstoProps = {
   toggleAuthModal,
-  getAuthStatus
+  getCurrentUser
 };
 
 export default connect(mapStateToProps, mapActionstoProps)(NavBar);

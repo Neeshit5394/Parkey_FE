@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Styled from "./styled";
-import { Form, Alert, Accordion, Button } from "react-bootstrap";
+import { Form, Alert, Accordion, Button, Spinner } from "react-bootstrap";
 import AccordianCard from "./AccordianCard";
 import moment from "moment";
 import { connect } from "react-redux";
 import axios from "axios";
-
+import { getAllListings } from "./../../store/actions";
 import ListingSearchBar from "../ListingSearchBar/ListingSearchBar";
 
 class Listing extends Component {
@@ -22,11 +22,18 @@ class Listing extends Component {
       endDate: null,
       endTime: null,
       details: null,
-      price: null
+      price: null,
+      loading: false
     };
   }
 
-  handleSubmit = e => {
+  componentDidMount() {
+    if (this.props.currentUser) {
+      this.props.getAllListings(this.props.currentUser);
+    }
+  }
+
+  handleSubmit = async e => {
     e.preventDefault();
     this.setState({
       ...this.state,
@@ -47,29 +54,42 @@ class Listing extends Component {
       });
       return false;
     } else {
-      console.log(this.props);
-      axios.post(`http://localhost:8080/listings/${this.props.uid}`, {
-        lat: this.props.coordinates.lat,
-        lng: this.props.coordinates.lng,
-        locationName: this.props.locationName,
-        price: Number(this.state.price) ? Number(this.state.price) : 0,
-        details: this.state.details,
-        startTime: moment(
-          `${this.state.startDate} ${this.state.startTime}`,
-          "YYYY-MM-DD hh:mm"
-        ).valueOf(),
-        endTime: moment(
-          `${this.state.endDate} ${this.state.endTime}`,
-          "YYYY-MM-DD hh:mm"
-        ).valueOf()
-      });
+      this.setState({ ...this.state, loading: true });
+      let { data } = await axios.post(
+        `http://localhost:8080/listings/${this.props.currentUser}`,
+        {
+          lat: this.props.coordinates.lat,
+          lng: this.props.coordinates.lng,
+          locationName: this.props.locationName,
+          price: Number(this.state.price) ? Number(this.state.price) : 0,
+          details: this.state.details,
+          startTime: moment(
+            `${this.state.startDate} ${this.state.startTime}`,
+            "YYYY-MM-DD hh:mm"
+          ).valueOf(),
+          endTime: moment(
+            `${this.state.endDate} ${this.state.endTime}`,
+            "YYYY-MM-DD hh:mm"
+          ).valueOf()
+        }
+      );
+      if (data) {
+        this.setState({ ...this.state, loading: false });
+      }
     }
   };
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-
+    if (this.state.loading) {
+      return (
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      );
+    }
+    console.log(this.props);
     let listing = [
       {
         id: 123,
@@ -114,12 +134,7 @@ class Listing extends Component {
         return <AccordianCard key={idx} detail={item} />;
       });
     }
-    let previousListings;
-    if (listing !== undefined) {
-      previousListings = listing.map((item, idx) => {
-        return <AccordianCard key={idx} detail={item} />;
-      });
-    }
+
     return (
       <Styled.Container>
         <div className="row">
@@ -129,11 +144,7 @@ class Listing extends Component {
               <hr />
               <Accordion defaultActiveKey="0">{activeListings}</Accordion>
             </div>
-            <div>
-              <h3 className="display-5">Previous Listings</h3>
-              <hr />
-              <Accordion defaultActiveKey="0">{previousListings}</Accordion>
-            </div>
+            
           </div>
           <div className="col-sm-12 col-lg-5 col-md-5">
             <h2 className="display-4">Post Parking</h2>
@@ -280,18 +291,20 @@ class Listing extends Component {
     );
   }
 }
+const mapActionsToProps = {
+  getAllListings
+};
+
 const mapStateToProps = state => {
-  // console.log(state);
   return {
     locationName:
       state.mapState.selectedAddress &&
       state.mapState.selectedAddress.locationName,
     coordinates:
       state.mapState.selectedAddress && state.mapState.selectedAddress.latLng,
-    uid: state.authState.profile && state.authState.profile.uid
+    currentUser: state.authState.currentUser,
+    listings: state.listingState.listings
   };
 };
 
-export default connect(mapStateToProps)(Listing);
-
-// max={moment().format("YYYY-MM-DD")}
+export default connect(mapStateToProps, mapActionsToProps)(Listing);

@@ -37,10 +37,10 @@ export default (state = intialState, action) => {
       return updatedObject(state, {
         latLng: action.payload
       });
-    case actionTypes.GET_LISTIING:
-      return updatedObject(state, {
-        allRentings: action.payload
-      });
+    // case actionTypes.GET_LISTIING:
+    //   return updatedObject(state, {
+    //     allRentings: action.payload
+    //   });
     case actionTypes.GET_SELECTED_ADDRESS: {
       return updatedObject(state, {
         selectedAddress: action.payload

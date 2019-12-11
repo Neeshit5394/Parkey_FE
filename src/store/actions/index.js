@@ -3,8 +3,9 @@ export {
   signUp,
   resetErrorFlag,
   signOut,
-  getAuthStatus,
-  updatePhoneNumber
+  getCurrentUser,
+  updatePhoneNumber,
+  getUserData
 } from "./authActions";
 
 export { toggleAuthModal } from "./UIActions";
@@ -12,3 +13,5 @@ export { toggleAuthModal } from "./UIActions";
 export { setLatLang, getListing, selectAddress } from "./mapActions";
 
 export { endReservation } from "./rentingAction";
+
+export { getAllListings } from "./listingActions";

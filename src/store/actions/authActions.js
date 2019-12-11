@@ -7,15 +7,6 @@ export const signIn = cred => async dispatch => {
     const { user } = await firebase
       .auth()
       .signInWithEmailAndPassword(cred.email, cred.password);
-    // To do :write an Api calling for fetching user database in MongoDB
-    const payload = {
-      email: user.email,
-      uid: user.uid
-    };
-    dispatch({
-      type: actionTypes.SIGN_IN,
-      payload: payload
-    });
     dispatch({
       type: actionTypes.TOGGLE_AUTH_MODEL
     });
@@ -31,27 +22,23 @@ export const signUp = cred => async dispatch => {
     const { user } = await firebase
       .auth()
       .createUserWithEmailAndPassword(cred.email, cred.password);
-    // To do :write an Api calling for updating user database in MongoDb
-    // console.log(firebase.auth().currentUser.getIdToken());
     if (user) {
-      // console.log(cred);
-      await axios.post("http://localhost:8080/users", {
+      console.log("posting");
+      let { data } = await axios.post("http://localhost:8080/users", {
         firstName: cred.firstName,
         lastName: cred.lastName,
         email: user.email,
-        phnumber: Number(cred.phnumber),
+        phnumber: cred.phnumber,
         id: user.uid
       });
+      if (data) {
+        dispatch({
+          type: actionTypes.TOGGLE_AUTH_MODEL
+        });
+      }
     } else {
-      console.log("error");
+      console.log("An error occurred while creating account!");
     }
-    dispatch({
-      type: actionTypes.SIGN_UP,
-      payload: user
-    });
-    dispatch({
-      type: actionTypes.TOGGLE_AUTH_MODEL
-    });
   } catch (e) {
     console.log(e);
     dispatch({
@@ -84,28 +71,33 @@ export const resetErrorFlag = () => dispatch => {
   });
 };
 
-export const getAuthStatus = () => dispatch => {
+export const getCurrentUser = () => dispatch => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       dispatch({
-        type: actionTypes.AUTH_STATUS,
-        payload: true
-      });
-      dispatch({
-        type: actionTypes.SIGN_IN,
-        payload: user
+        type: actionTypes.CURRENT_USER,
+        payload: user.uid
       });
     } else {
       dispatch({
-        type: actionTypes.AUTH_STATUS,
-        payload: false
+        type: actionTypes.CURRENT_USER,
+        payload: null
       });
     }
   });
 };
+
+export const getUserData = id => async dispatch => {
+  console.log("getting");
+  let { data } = await axios.get(`http://localhost:8080/users/${id}`);
+  if (data) {
+    dispatch({
+      type: actionTypes.GET_USER_DATA,
+      payload: data
+    });
+  }
+};
 export const updatePhoneNumber = async (id, newNumber) => {
-  console.log(id);
-  console.log(newNumber);
   try {
     await axios.patch(`http://localhost:8080/users/${id}`, {
       phnumber: newNumber
