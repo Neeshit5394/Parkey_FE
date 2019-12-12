@@ -20,6 +20,7 @@ class Map extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       // Important! Always set the container height explicitly
       <div style={{ height:'78vh', width: '100%' }}>
@@ -43,8 +44,7 @@ class Map extends Component {
 }
 const mapStateToProps = state => {
   return {
-    latLng: state.mapState.latLng,
-    
+    latLng: state.mapState.latLng 
   };
 };
 

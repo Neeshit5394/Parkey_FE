@@ -1,11 +1,11 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
-export const getAllListings = id => async dispatch => {
+export const getUserListings = id => async dispatch => {
   try {
     let { data } = await axios.get(`http://localhost:8080/listings/${id}`);
     if (data) {
       dispatch({
-        type: actionTypes.GET_LISTIINGS,
+        type: actionTypes.GET_USER_LISTIINGS,
         payload: data
       });
     }
@@ -19,4 +19,14 @@ export const updateListings = (oldList, newData) => {
     type: actionTypes.UPDATE_LISTINGS,
     payload: newList
   };
+};
+export const getAllListings = () => async dispatch => {
+  let { data } = await axios.get("http://localhost:8080/listings");
+  try {
+    if (data) {
+      dispatch({ type: actionTypes.GET_ALL_LISTINGS, payload: data });
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };

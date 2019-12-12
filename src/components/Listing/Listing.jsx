@@ -5,7 +5,7 @@ import AccordianCard from "./AccordianCard";
 import moment from "moment";
 import { connect } from "react-redux";
 import axios from "axios";
-import { getAllListings, updateListings } from "./../../store/actions";
+import { getUserListings, updateListings } from "./../../store/actions";
 import ListingSearchBar from "../ListingSearchBar/ListingSearchBar";
 
 class Listing extends Component {
@@ -28,7 +28,7 @@ class Listing extends Component {
 
   componentDidMount = () => {
     if (this.props.currentUser) {
-      this.props.getAllListings(this.props.currentUser);
+      this.props.getUserListings(this.props.currentUser);
     }
   };
 
@@ -72,11 +72,12 @@ class Listing extends Component {
         }
       );
       if (data) {
-        this.props.updateListings(this.props.listings, data);
+        this.props.updateListings(this.props.userListings, data);
       }
     }
   };
   render() {
+    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -88,8 +89,8 @@ class Listing extends Component {
       );
     }
     let activeListings;
-    if (this.props.listings && this.props.listings.length > 0) {
-      activeListings = this.props.listings.map((item, idx) => {
+    if (this.props.userListings && this.props.userListings.length > 0) {
+      activeListings = this.props.userListings.map((item, idx) => {
         return <AccordianCard key={idx} detail={item} />;
       });
     }
@@ -250,7 +251,7 @@ class Listing extends Component {
   }
 }
 const mapActionsToProps = {
-  getAllListings,
+  getUserListings,
   updateListings
 };
 
@@ -262,7 +263,7 @@ const mapStateToProps = state => {
     coordinates:
       state.mapState.selectedAddress && state.mapState.selectedAddress.latLng,
     currentUser: state.authState.currentUser,
-    listings: state.listingState.listings
+    userListings: state.listingState.userListings
   };
 };
 
