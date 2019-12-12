@@ -5,7 +5,7 @@ import AccordianCard from "./AccordianCard";
 import moment from "moment";
 import { connect } from "react-redux";
 import axios from "axios";
-import { getAllListings } from "./../../store/actions";
+import { getAllListings, updateListings } from "./../../store/actions";
 import ListingSearchBar from "../ListingSearchBar/ListingSearchBar";
 
 class Listing extends Component {
@@ -22,16 +22,15 @@ class Listing extends Component {
       endDate: null,
       endTime: null,
       details: null,
-      price: null,
-      loading: false
+      price: null
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (this.props.currentUser) {
       this.props.getAllListings(this.props.currentUser);
     }
-  }
+  };
 
   handleSubmit = async e => {
     e.preventDefault();
@@ -54,19 +53,6 @@ class Listing extends Component {
       });
       return false;
     } else {
-      this.setState({ ...this.state, loading: true });
-      console.log(
-        `${this.state.startDate} ${this.state.startTime}  ${moment(
-          `${this.state.startDate} ${this.state.startTime}`,
-          "YYYY-MM-DD HH:mm"
-        ).valueOf()}`
-      );
-      console.log(
-        `${this.state.endDate} ${this.state.endTime} ${moment(
-          `${this.state.endDate} ${this.state.endTime}`,
-          "YYYY-MM-DD HH:mm"
-        ).valueOf()}`
-      );
       let { data } = await axios.post(
         `http://localhost:8080/listings/${this.props.currentUser}`,
         {
@@ -86,7 +72,7 @@ class Listing extends Component {
         }
       );
       if (data) {
-        this.setState({ ...this.state, loading: false });
+        this.props.updateListings(this.props.listings, data);
       }
     }
   };
@@ -102,9 +88,8 @@ class Listing extends Component {
       );
     }
     let activeListings;
-    let listings = this.props.listings;
-    if (listings && listings.length > 0) {
-      activeListings = listings.map((item, idx) => {
+    if (this.props.listings && this.props.listings.length > 0) {
+      activeListings = this.props.listings.map((item, idx) => {
         return <AccordianCard key={idx} detail={item} />;
       });
     }
@@ -265,7 +250,8 @@ class Listing extends Component {
   }
 }
 const mapActionsToProps = {
-  getAllListings
+  getAllListings,
+  updateListings
 };
 
 const mapStateToProps = state => {

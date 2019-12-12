@@ -13,3 +13,10 @@ export const getAllListings = id => async dispatch => {
     console.log(e);
   }
 };
+export const updateListings = (oldList, newData) => {
+  let newList = oldList.concat(newData);
+  return {
+    type: actionTypes.UPDATE_LISTINGS,
+    payload: newList
+  };
+};

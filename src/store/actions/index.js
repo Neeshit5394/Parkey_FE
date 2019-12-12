@@ -14,4 +14,4 @@ export { setLatLang, getListing, selectAddress } from "./mapActions";
 
 export { endReservation } from "./rentingAction";
 
-export { getAllListings } from "./listingActions";
+export { getAllListings,updateListings } from "./listingActions";

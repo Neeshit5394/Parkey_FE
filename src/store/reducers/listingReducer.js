@@ -12,6 +12,10 @@ export default (state = initialState, action) => {
       return updatedObject(state, {
         listings: action.payload
       });
+    case actionTypes.UPDATE_LISTINGS:
+      return updatedObject(state, {
+        listings: action.payload
+      });
     default:
       return state;
   }
