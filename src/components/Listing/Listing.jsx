@@ -55,6 +55,18 @@ class Listing extends Component {
       return false;
     } else {
       this.setState({ ...this.state, loading: true });
+      console.log(
+        `${this.state.startDate} ${this.state.startTime}  ${moment(
+          `${this.state.startDate} ${this.state.startTime}`,
+          "YYYY-MM-DD HH:mm"
+        ).valueOf()}`
+      );
+      console.log(
+        `${this.state.endDate} ${this.state.endTime} ${moment(
+          `${this.state.endDate} ${this.state.endTime}`,
+          "YYYY-MM-DD HH:mm"
+        ).valueOf()}`
+      );
       let { data } = await axios.post(
         `http://localhost:8080/listings/${this.props.currentUser}`,
         {
@@ -65,11 +77,11 @@ class Listing extends Component {
           details: this.state.details,
           startTime: moment(
             `${this.state.startDate} ${this.state.startTime}`,
-            "YYYY-MM-DD hh:mm"
+            "YYYY-MM-DD HH:mm"
           ).valueOf(),
           endTime: moment(
             `${this.state.endDate} ${this.state.endTime}`,
-            "YYYY-MM-DD hh:mm"
+            "YYYY-MM-DD HH:mm"
           ).valueOf()
         }
       );
@@ -89,48 +101,10 @@ class Listing extends Component {
         </Spinner>
       );
     }
-    console.log(this.props);
-    let listing = [
-      {
-        id: 123,
-        description:
-          "dsfdsln sdkfhkdsj dsfdshfjv dsjfds dsfhvjfds dsjfv sd fhdsgfhvds sdhgfhds hvdsjfvs jhhjds jfvjhvds hsgdshf  kjhjf dskfbkj dskjfkdsjk dsfkjdsbk dsjkfhdsk sdjkfkjdsk kjdshfds kjhdsfjj",
-        location_name: "Jurassic Park",
-        date: "12 January 2019",
-        price: "10 $",
-        "time-remaining": "2 hours",
-        "renter-name": "Amit",
-        email: "avadnere@stevens.edu",
-        "phone-number": 2018503791
-      },
-      {
-        id: 13,
-        location_name: "Jurassic Park",
-        description:
-          "dsfdsln sdkfhkdsj kjhjf dskfbkj dskjfkdsjk dsfkjdsbk dsjkfhdsk sdjkfkjdsk kjdshfds kjhdsfjj",
-        price: "10 $",
-        date: "12 January 2019",
-        "time-remaining": "2 hours",
-        "renter-name": "Amit",
-        email: "avadnere@stevens.edu",
-        "phone-number": 2018503791
-      },
-      {
-        id: 12,
-        location_name: "Jurassic Park",
-        description:
-          "dsfdsln sdkfhkdsj kjhjf dskfbkj dskjfkdsjk dsfkjdsbk dsjkfhdsk sdjkfkjdsk kjdshfds kjhdsfjj",
-        price: "10 $",
-        date: "12 January 2019",
-        "time-remaining": "2 hours",
-        "renter-name": "Amit",
-        email: "avadnere@stevens.edu",
-        "phone-number": 2018503791
-      }
-    ];
     let activeListings;
-    if (listing !== undefined) {
-      activeListings = listing.map((item, idx) => {
+    let listings = this.props.listings;
+    if (listings && listings.length > 0) {
+      activeListings = listings.map((item, idx) => {
         return <AccordianCard key={idx} detail={item} />;
       });
     }
@@ -140,14 +114,13 @@ class Listing extends Component {
         <div className="row">
           <div className="col-sm-12 col-lg-7 col-md-7 listing-part">
             <div className="listing-part">
-              <h3 className="display-5">Active Listings</h3>
+              <h3 className="display-5">Your Listings</h3>
               <hr />
               <Accordion defaultActiveKey="0">{activeListings}</Accordion>
             </div>
-            
           </div>
           <div className="col-sm-12 col-lg-5 col-md-5">
-            <h2 className="display-4">Post Parking</h2>
+            <h2 className="display-4">Post a Listing/Parking</h2>
             <hr />
             <Alert show={this.state.visible} key="success" variant="success">
               Parking Posted Successfully
@@ -191,6 +164,7 @@ class Listing extends Component {
                       placeholder="Date"
                       onChange={e => {
                         e.preventDefault();
+                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           startDate: e.target.value
@@ -211,6 +185,7 @@ class Listing extends Component {
                       placeholder="Start Time"
                       onChange={e => {
                         e.preventDefault();
+                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           startTime: e.target.value
@@ -227,15 +202,13 @@ class Listing extends Component {
                     <Form.Control
                       required
                       type="date"
-                      min={moment()
-                        .toDate()
-                        .getTime()}
                       max={moment()
                         .add(7, "days")
                         .format("YYYY-MM-DD")}
                       placeholder="End Date"
                       onChange={e => {
                         e.preventDefault();
+                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           endDate: e.target.value

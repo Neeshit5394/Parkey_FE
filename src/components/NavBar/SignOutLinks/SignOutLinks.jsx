@@ -13,7 +13,7 @@ class SignOutLinks extends Component {
     if (this.props.currentUser) {
       window.setTimeout(
         () => this.props.getUserData(this.props.currentUser),
-        1000
+        100
       );
     }
   }
@@ -54,11 +54,8 @@ const mapStateToProps = state => {
   return {
     showAuthModal: state.uiState.showAuthModal,
     currentUser: state.authState.currentUser,
-    userData: state.authState.userData,
-    isAuth: state.authState.isAuth
+    userData: state.authState.userData
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapActionsToProps)(SignOutLinks)
-);
+export default connect(mapStateToProps, mapActionsToProps)(SignOutLinks);

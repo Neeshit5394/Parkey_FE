@@ -1,13 +1,13 @@
-import { Card, Accordion, Button } from "react-bootstrap"
-import React, { Component } from 'react';
+import { Card, Accordion, Button } from "react-bootstrap";
+import React, { Component } from "react";
 import Styled from "./styled";
-import { connect } from "react-redux";
-
+// import { connect } from "react-redux";
+import moment from "moment";
 
 class AccordianCard extends Component {
   state = {
-    hasError: false,
-  }
+    hasError: false
+  };
 
   render() {
     if (this.state.hasError) {
@@ -18,64 +18,54 @@ class AccordianCard extends Component {
       <Styled.Container>
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" className="header-toggle" eventKey={this.props.detail.id}>
-              {this.props.detail.location_name} {this.props.detail.date}
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              className="header-toggle"
+              eventKey={this.props.detail.id}
+            >
+              {this.props.detail.locationName}
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey={this.props.detail.id}>
+          <Accordion.Collapse
+            eventKey={this.props.details && this.props.details._id}
+          >
             <Card.Body>
-            <Styled.Listing>
-              <div className="heading">
-                Description
-              </div>
-              <hr/>
-              <p>
-              {this.props.detail.description}
-              </p>
-              <div className="row">
-                <div className="col-sm-12 col-md-6 col-lg-6">
-                <div className="heading">
-               Location
-              </div>
-              <p>
-              {this.props.detail.location_name}
-              </p>
+              <Styled.Listing>
+                <div className="heading">Description</div>
+                <hr />
+                <p>{this.props.detail.details}</p>
+                <div className="row">
+                  <div className="col-sm-12 col-md-6 col-lg-6">
+                    <div className="heading">Location</div>
+                    <p>{this.props.detail && this.props.detail.locationName}</p>
+                  </div>
+                  <div className="col-sm-12 col-md-6 col-lg-6">
+                    <div className="heading">Start Time</div>
+                    {moment
+                      .unix(this.props.detail.startTime / 1000)
+                      .format("M/D/YYYY hh:mm")}
+                  </div>
+                  <div className="col-sm-12 col-md-6 col-lg-6">
+                    <div className="heading">End Time</div>
+                    {moment
+                      .unix(this.props.detail.endTime / 1000)
+                      .format("M/D/YYYY hh:mm")}
+                  </div>
                 </div>
-                <div className="col-sm-12 col-md-6 col-lg-6">
-                <div className="heading">
-               Time Remaining
-              </div>
-            
-              <p>
-              2:30
-              </p>
-                </div>
-              </div>
-            
-            
-            </Styled.Listing>
-              
-             
-              
-              
+              </Styled.Listing>
 
               <footer className="pull-right">
-                <Button className="secondary" variant="danger">Delete</Button>
+                <Button className="secondary" variant="danger">
+                  Delete
+                </Button>
               </footer>
             </Card.Body>
-
           </Accordion.Collapse>
-
         </Card>
       </Styled.Container>
     );
   }
 }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
 
-//     deleteCalorie:(mealId) => dispatch(deleteCalorie(mealId))
-//   };
-// }
-// connect(null , mapDispatchToProps)
-export default AccordianCard
+export default AccordianCard;
