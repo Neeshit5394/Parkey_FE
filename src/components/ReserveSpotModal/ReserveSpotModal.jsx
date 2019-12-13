@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Styled from "./styled";
 import { Modal, Tabs, Tab } from "react-bootstrap";
-import { toggleReserveSpot } from "../../store/actions/UIActions";
+import {
+  toggleReserveSpot,
+  toggleAuthModal
+} from "../../store/actions/UIActions";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
@@ -25,7 +28,9 @@ class ReserveSpotModal extends Component {
           <Styled.ModalHeader closeButton>
             <Modal.Title>
               <h1 className="display-4  heading-1">Reserve Spot</h1>
-              <h2 className="display-4 heading-2">{this.props.spot.locationName}</h2>
+              <h2 className="display-4 heading-2">
+                {this.props.spot.locationName}
+              </h2>
             </Modal.Title>
           </Styled.ModalHeader>
           <Styled.ModalBody>
@@ -46,14 +51,18 @@ class ReserveSpotModal extends Component {
                   <p>{this.props.spot.price} $</p>
                 </div>
               </div>
-              <p className="termsCondition">*By clicking on the Reserve Spot you will be charged according to the above rates</p>
+              <p className="termsCondition">
+                *By clicking on the Reserve Spot you will be charged according
+                to the above rates
+              </p>
               {/* <p><span className="spot-available-time-box">4 hrs</span></p> */}
             </Modal.Body>
-
           </Styled.ModalBody>
           <Modal.Footer>
             <Styled.Footer>
-              <button type="button" className="btn btn-primary btn-md ">Reserve Now</button>
+              <button type="button" className="btn btn-primary btn-md ">
+                Reserve Now
+              </button>
             </Styled.Footer>
           </Modal.Footer>
         </Modal>
@@ -61,13 +70,13 @@ class ReserveSpotModal extends Component {
     );
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleReserveSpot: () => dispatch(toggleReserveSpot())
-  };
-}
-export default connect(null, mapDispatchToProps)(ReserveSpotModal);
+const mapActionsToProps = {
+  toggleReserveSpot,
+  toggleAuthModal
+};
 
+const mapStateToProps = state => {
+  return { currentUser: state.authState.currentUser };
+};
 
-// export default ReserveSpotModal;
-
+export default connect(mapStateToProps, mapActionsToProps)(ReserveSpotModal);
