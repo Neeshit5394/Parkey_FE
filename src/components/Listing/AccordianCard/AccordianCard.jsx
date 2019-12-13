@@ -22,13 +22,13 @@ class AccordianCard extends Component {
               as={Button}
               variant="link"
               className="header-toggle"
-              eventKey={this.props.detail.id}
+              eventKey={this.props.detail._id}
             >
               {this.props.detail.locationName}
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse
-            eventKey={this.props.details && this.props.details._id}
+            eventKey={ this.props.detail._id}
           >
             <Card.Body>
               <Styled.Listing>

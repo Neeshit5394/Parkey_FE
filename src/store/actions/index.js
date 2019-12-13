@@ -8,7 +8,7 @@ export {
   getUserData
 } from "./authActions";
 
-export { toggleAuthModal } from "./UIActions";
+export { toggleAuthModal, toggleReserveSpot} from "./UIActions";
 
 export { setLatLang, getListing, selectAddress } from "./mapActions";
 

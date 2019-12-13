@@ -20,8 +20,10 @@ export const updateListings = (oldList, newData) => {
     payload: newList
   };
 };
-export const getAllListings = () => async dispatch => {
-  let { data } = await axios.get("http://localhost:8080/listings");
+export const getAllListings = (latLng) => async dispatch => {
+  // 
+  let { data } = await axios.get(`http://localhost:8080/listings/${latLng.lat}/${latLng.lng}/100`);
+
   try {
     if (data) {
       dispatch({ type: actionTypes.GET_ALL_LISTINGS, payload: data });

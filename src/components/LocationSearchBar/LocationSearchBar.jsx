@@ -5,7 +5,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
-import { setLatLang, selectAddress } from "../../store/actions";
+import { setLatLang, selectAddress,getAllListings } from "../../store/actions";
 import { connect } from "react-redux";
 
 class ListingSearchBar extends React.Component {
@@ -46,6 +46,7 @@ class ListingSearchBar extends React.Component {
         pathname: `/parkings/${address}`,
         state: { latlang: latLng }
       });
+      this.props.getAllListings(latLng)
     } catch (e) {
       console.log(e);
     }
@@ -119,7 +120,8 @@ class ListingSearchBar extends React.Component {
 
 const mapActionsToProps = {
   setLatLang,
-  selectAddress
+  selectAddress,
+  getAllListings
 };
 
 export default withRouter(connect(null, mapActionsToProps)(ListingSearchBar));

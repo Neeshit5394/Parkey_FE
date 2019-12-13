@@ -19,7 +19,7 @@ class Parkings extends Component {
   };
 
   componentDidMount() {
-    this.props.getAllListings();
+    this.props.getAllListings(this.props.latLng);
   }
 
   render() {
@@ -34,7 +34,7 @@ class Parkings extends Component {
       ));
 
     return (
-      <Styled.Wrapper className="jumbotron">
+      <Styled.Wrapper >
         <Styled.MenuWrapper>
           <div className="row">
             <Styled.LocationSearchBar className="col-sm-11 col-md-11 col-lg-4">
@@ -87,7 +87,8 @@ const mapStateToProps = state => {
   return {
     showReserveSpotModal: state.uiState.showReserveSpotModal,
     allListings: state.listingState.allListings,
-    reserveSpotModalData: state.uiState.reserveSpotModalData
+    reserveSpotModalData: state.uiState.reserveSpotModalData,
+    latLng:state.mapState.latLng
   };
 };
 
