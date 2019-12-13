@@ -41,12 +41,12 @@ class ListingSearchBar extends React.Component {
       let results = await geocodeByAddress(address);
       let latLng = await getLatLng(results[0]);
       this.props.selectAddress(address, latLng);
+      this.props.getAllListings(latLng)
       this.props.setLatLang(latLng);
       this.props.history.push({
         pathname: `/parkings/${address}`,
         state: { latlang: latLng }
       });
-      this.props.getAllListings(latLng)
     } catch (e) {
       console.log(e);
     }

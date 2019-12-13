@@ -27,11 +27,15 @@ class Parkings extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    const rentings =
-      this.props.allListings &&
-      this.props.allListings.map((item, idx) => (
+    let rentings = null;
+    
+    if ((this.props.allListings) != null && typeof(this.props.allListings) != "string"){
+      console.log(typeof this.props.allListings)
+        rentings = this.props.allListings.map((item, idx) => (
         <ParkingSpots key={idx} parkingSpot={item} />
       ));
+    }
+    
 
     return (
       <Styled.Wrapper >
@@ -65,7 +69,7 @@ class Parkings extends Component {
             <ParkingSpots title="DMart Parking" description="Parking hours between 2 PM to 3 PM" />
             <ParkingSpots title="Apna Bazar Parking" description="Parking hours between 1 PM to 6 PM" />
             <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" /> */}
-            {rentings}
+            { this.props.listingError != null  ? <div> {this.props.listingError}</div>:rentings}
           </Styled.Parkings>
         </div>
         {this.props.reserveSpotModalData != null ? (
@@ -87,6 +91,7 @@ const mapStateToProps = state => {
   return {
     showReserveSpotModal: state.uiState.showReserveSpotModal,
     allListings: state.listingState.allListings,
+    listingError: state.listingState.error,
     reserveSpotModalData: state.uiState.reserveSpotModalData,
     latLng:state.mapState.latLng
   };

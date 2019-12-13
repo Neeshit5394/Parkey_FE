@@ -29,7 +29,7 @@ class ReserveSpotModal extends Component {
             </Modal.Title>
           </Styled.ModalHeader>
           <Styled.ModalBody>
-            <Modal.Body>
+            
               <h3 className="display-4 heading-3">Description</h3>
               <p>{this.props.spot.details}</p>
               <div className="row">
@@ -48,8 +48,6 @@ class ReserveSpotModal extends Component {
               </div>
               <p className="termsCondition">*By clicking on the Reserve Spot you will be charged according to the above rates</p>
               {/* <p><span className="spot-available-time-box">4 hrs</span></p> */}
-            </Modal.Body>
-
           </Styled.ModalBody>
           <Modal.Footer>
             <Styled.Footer>
