@@ -18,6 +18,9 @@ class ListingSearchBar extends React.Component {
       selectedAddress: ""
     };
   }
+  componentDidMount() {
+    this.props.selectAddress(null, null);
+  }
 
   handleChange = address => {
     if (address === "" || address === undefined) {
@@ -40,8 +43,6 @@ class ListingSearchBar extends React.Component {
       });
       let results = await geocodeByAddress(address);
       let latLng = await getLatLng(results[0]);
-      // this.props.setLatLang(latLng);
-      // this.props.getLocation({ address, latLng });
       this.props.selectAddress(address, latLng);
     } catch (e) {
       console.log(e);

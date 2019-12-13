@@ -3,7 +3,7 @@ import * as actionTypes from "../actions/actionTypes";
 import { updatedObject } from "../utility";
 
 const intialState = {
-  latLng: { lat: 40.7813241, lng: -73.97398820000001 },
+  // latLng: { lat: 40.7813241, lng: -73.97398820000001 },
   // The below allRentings should be an empty. For testing I have added some data
   allRentings: [
     {
