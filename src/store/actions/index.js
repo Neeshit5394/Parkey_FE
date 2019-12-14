@@ -4,8 +4,10 @@ export {
   resetErrorFlag,
   signOut,
   getCurrentUser,
-  updatePhoneNumber,
-  getUserData
+  //updatePhoneNumber,
+  updatePassword,
+  getUserData,
+  resetUpdatePasswordFlag
 } from "./authActions";
 
 export { toggleAuthModal, toggleReserveSpot } from "./UIActions";
@@ -17,5 +19,6 @@ export { endReservation, reserveSpot,getUserRentings } from "./rentingAction";
 export {
   getUserListings,
   updateListings,
-  getAllListings
+  getAllListings,
+  deleteListing
 } from "./listingActions";
