@@ -57,7 +57,7 @@ const Logo = styled.span`
 const Footer = styled.div`
 
     width:100%;  
-    text-align:right;
+    text-align:center;
     font-size:15px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     .btn{

@@ -28,32 +28,23 @@ class Parkings extends Component {
       return <h1>Something went wrong.</h1>;
     }
     let rentings = null;
-    
-    if ((this.props.allListings) != null && typeof(this.props.allListings) != "string"){
-      console.log(typeof this.props.allListings)
-        rentings = this.props.allListings.map((item, idx) => (
+
+    if (
+      this.props.allListings != null &&
+      typeof this.props.allListings != "string"
+    ) {
+      rentings = this.props.allListings.map((item, idx) => (
         <ParkingSpots key={idx} parkingSpot={item} />
       ));
     }
-    
 
     return (
-      <Styled.Wrapper >
+      <Styled.Wrapper>
         <Styled.MenuWrapper>
           <div className="row">
             <Styled.LocationSearchBar className="col-sm-11 col-md-11 col-lg-4">
               <LocationSearchBar />
             </Styled.LocationSearchBar>
-            <Styled.MenuBtn className="col-sm-11 col-md-11 col-lg-1">
-              <button type="button" className="btn btn-primary">
-                Rent
-              </button>
-            </Styled.MenuBtn>
-            <Styled.MenuBtn className="col-sm-11 col-md-11 col-lg-1">
-              <button type="button" className="btn btn-primary">
-                Filter
-              </button>
-            </Styled.MenuBtn>
           </div>
         </Styled.MenuWrapper>
 
@@ -69,7 +60,11 @@ class Parkings extends Component {
             <ParkingSpots title="DMart Parking" description="Parking hours between 2 PM to 3 PM" />
             <ParkingSpots title="Apna Bazar Parking" description="Parking hours between 1 PM to 6 PM" />
             <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" /> */}
-            { this.props.listingError != null  ? <div> {this.props.listingError}</div>:rentings}
+            {this.props.listingError != null ? (
+              <div> {this.props.listingError}</div>
+            ) : (
+              rentings
+            )}
           </Styled.Parkings>
         </div>
         {this.props.reserveSpotModalData != null ? (
@@ -93,7 +88,7 @@ const mapStateToProps = state => {
     allListings: state.listingState.allListings,
     listingError: state.listingState.error,
     reserveSpotModalData: state.uiState.reserveSpotModalData,
-    latLng:state.mapState.latLng
+    latLng: state.mapState.latLng
   };
 };
 

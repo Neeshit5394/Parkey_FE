@@ -59,10 +59,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleReserveSpot: parkingSpot => dispatch(toggleReserveSpot(parkingSpot)),
-    toggleAuthModal: () => dispatch(toggleAuthModal())
-  };
+const mapActionsToProps = {
+  toggleReserveSpot,
+  toggleAuthModal
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ParkingSpot);
+export default connect(mapStateToProps, mapActionsToProps)(ParkingSpot);
