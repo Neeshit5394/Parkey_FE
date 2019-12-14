@@ -48,7 +48,7 @@ class ParkingSpot extends Component {
             type="button"
             className="btn btn-primary btn-md"
             onClick={() => {
-              if (this.propscurrentUser) {
+              if (this.props.currentUser) {
                 this.props.toggleReserveSpot(this.props.parkingSpot);
               } else this.props.toggleAuthModal();
             }}

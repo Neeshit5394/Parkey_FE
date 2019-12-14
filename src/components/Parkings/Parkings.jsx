@@ -14,8 +14,7 @@ class Parkings extends Component {
   state = {
     hasError: false,
     show: false,
-    hide: true,
-    latLng: this.props.location.state.latLng
+    hide: true
   };
 
   componentDidMount() {
@@ -56,7 +55,7 @@ class Parkings extends Component {
         <div className="row">
           <Styled.MapContainer className="col-sm-12 col-md-8 col-lg-8">
             <div className="map">
-              <Map latLng={this.state.latLng} />
+              <Map latLng={this.props.location.state.latLng} />
             </div>
           </Styled.MapContainer>
 
