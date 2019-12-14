@@ -1,7 +1,8 @@
 import { Card, Accordion, Button } from "react-bootstrap";
 import React, { Component } from "react";
 import Styled from "./styled";
-// import { connect } from "react-redux";
+import { deleteListing } from "../../../store/actions";
+import { connect } from "react-redux";
 import moment from "moment";
 
 class AccordianCard extends Component {
@@ -56,7 +57,7 @@ class AccordianCard extends Component {
               </Styled.Listing>
 
               <footer className="pull-right">
-                <Button className="secondary" variant="danger">
+                <Button onClick={() => this.props.deleteListing(this.props.detail._id)} className="secondary" variant="danger">
                   Delete
                 </Button>
               </footer>
@@ -67,5 +68,9 @@ class AccordianCard extends Component {
     );
   }
 }
+const mapActionsToProps = {
+  deleteListing,
+};
 
-export default AccordianCard;
+export default connect(null, mapActionsToProps)(AccordianCard);
+
