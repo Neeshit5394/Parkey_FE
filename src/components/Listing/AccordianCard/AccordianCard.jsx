@@ -14,7 +14,8 @@ class AccordianCard extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-
+    // let a = moment.unix(moment().valueOf());
+    // let b = moment.unix(this.props.startTime);
     return (
       <Styled.Container>
         <Card>
@@ -28,9 +29,7 @@ class AccordianCard extends Component {
               {this.props.detail.locationName}
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse
-            eventKey={ this.props.detail._id}
-          >
+          <Accordion.Collapse eventKey={this.props.detail._id}>
             <Card.Body>
               <Styled.Listing>
                 <div className="heading">Description</div>
@@ -45,19 +44,28 @@ class AccordianCard extends Component {
                     <div className="heading">Start Time</div>
                     {moment
                       .unix(this.props.detail.startTime / 1000)
-                      .format("M/D/YYYY hh:mm")}
+                      .format("M/D/YYYY hh:mm a")}
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6">
                     <div className="heading">End Time</div>
                     {moment
                       .unix(this.props.detail.endTime / 1000)
-                      .format("M/D/YYYY hh:mm")}
+                      .format("M/D/YYYY hh:mm a")}
+                  </div>
+                  <div className="col-sm-12 col-md-6 col-lg-6">
+                    <div className="heading">Time to expiry</div>{" "}
+                    {/*TODO: add moment syntax for calculating time diff */}
                   </div>
                 </div>
               </Styled.Listing>
 
               <footer className="pull-right">
-                <Button onClick={() => this.props.deleteListing(this.props.detail._id)} className="secondary" variant="danger">
+                <Button
+                  onClick={() =>
+                    this.props.deleteListing(this.props.detail._id)
+                  }
+                  className="btn btn-danger"
+                >
                   Delete
                 </Button>
               </footer>
@@ -69,8 +77,7 @@ class AccordianCard extends Component {
   }
 }
 const mapActionsToProps = {
-  deleteListing,
+  deleteListing
 };
 
 export default connect(null, mapActionsToProps)(AccordianCard);
-

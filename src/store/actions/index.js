@@ -14,7 +14,7 @@ export { toggleAuthModal, toggleReserveSpot } from "./UIActions";
 
 export { setLatLang, getListing, selectAddress } from "./mapActions";
 
-export { endReservation, reserveSpot,getUserRentings } from "./rentingAction";
+export { reserveSpot, getUserRentings, updateRentings } from "./rentingAction";
 
 export {
   getUserListings,

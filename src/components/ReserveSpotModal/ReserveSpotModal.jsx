@@ -8,6 +8,7 @@ import {
 } from "../../store/actions";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import moment from "moment";
 
 class ReserveSpotModal extends Component {
   state = {
@@ -70,7 +71,8 @@ class ReserveSpotModal extends Component {
                   onClick={() => {
                     this.props.reserveSpot(
                       this.props.spot._id,
-                      this.props.currentUser
+                      this.props.currentUser,
+                      moment().valueOf()
                     );
                     this.props.toggleReserveSpot();
                   }}

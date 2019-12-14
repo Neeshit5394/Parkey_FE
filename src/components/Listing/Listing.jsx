@@ -54,7 +54,7 @@ class Listing extends Component {
       return false;
     } else {
       let { data } = await axios.post(
-        `http://localhost:8080/listings/${this.props.currentUser}`,
+        `${process.env.REACT_APP_BE_URL}/listings/${this.props.currentUser}`,
         {
           lat: this.props.coordinates.lat,
           lng: this.props.coordinates.lng,
@@ -74,6 +74,7 @@ class Listing extends Component {
       if (data) {
         this.props.updateListings(this.props.userListings, data);
       }
+      this.myFormRef.reset();
     }
   };
   render() {
@@ -118,7 +119,10 @@ class Listing extends Component {
             >
               {this.state.error}
             </Alert>
-            <Form onSubmit={this.handleSubmit}>
+            <Form
+              onSubmit={this.handleSubmit}
+              ref={el => (this.myFormRef = el)}
+            >
               <Form.Group controlId="Location">
                 <Form.Label>Location</Form.Label>
                 <ListingSearchBar getLocation={this.handleChange} />

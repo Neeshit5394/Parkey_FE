@@ -17,6 +17,10 @@ export default (state = intialState, action) => {
       return updatedObject(state, {
         userRentings: action.payload
       });
+    case actionTypes.UPDATE_RENTINGS:
+      return updatedObject(state, {
+        userRentings: action.payload
+      });
     default:
       return state;
   }

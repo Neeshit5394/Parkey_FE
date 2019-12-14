@@ -30,7 +30,7 @@ export const signUp = cred => async dispatch => {
       console.log("posting");
       let {
         data
-      } = await axios.post("http://localhost:8080/users", {
+      } = await axios.post(`${process.env.REACT_APP_BE_URL}/users`, {
         firstName: cred.firstName,
         lastName: cred.lastName,
         email: user.email,
@@ -96,7 +96,7 @@ export const getCurrentUser = () => dispatch => {
 export const getUserData = id => async dispatch => {
   let {
     data
-  } = await axios.get(`http://localhost:8080/users/${id}`);
+  } = await axios.get(`${process.env.REACT_APP_BE_URL}/users/${id}`);
   if (data) {
     dispatch({
       type: actionTypes.GET_USER_DATA,
@@ -106,7 +106,7 @@ export const getUserData = id => async dispatch => {
 };
 // export const updatePhoneNumber = async (id, newNumber) => {
 //   try {
-//     await axios.patch(`http://localhost:8080/users/${id}`, {
+//     await axios.patch(`process.env.REACT_APP_BE_URL/users/${id}`, {
 //       phnumber: newNumber
 //     });
 //   } catch {

@@ -9,14 +9,28 @@ export const endReservation = reservation_Object => dispatch => {
   });
 };
 
-export const reserveSpot = (listingId, renterId) => async dispatch => {
+export const reserveSpot = (
+  listingId,
+  renterId,
+  rentingStartTime
+) => async dispatch => {
   let { data } = await axios.patch(
-    `http://localhost:8080/listings/${listingId}/${renterId}`
+    `${process.env.REACT_APP_BE_URL}/listings/${listingId}/${renterId}/${rentingStartTime}`
   );
   if (data) dispatch({ type: actionTypes.RESERVE_SPOT, payload: false });
 };
 
 export const getUserRentings = id => async dispatch => {
-  let { data } = await axios.get(`http://localhost:8080/rentings/${id}`);
+  let { data } = await axios.get(
+    `${process.env.REACT_APP_BE_URL}/rentings/${id}`
+  );
   if (data) dispatch({ type: actionTypes.GET_USER_RENTINGS, payload: data });
+};
+
+export const updateRentings = (oldList, removeId) => {
+  let newList = oldList.filter(item => item._id != removeId);
+  return {
+    type: actionTypes.UPDATE_RENTINGS,
+    payload: newList
+  };
 };
