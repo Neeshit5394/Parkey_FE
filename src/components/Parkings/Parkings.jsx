@@ -19,7 +19,7 @@ class Parkings extends Component {
   };
 
   componentDidMount() {
-    this.props.getAllListings();
+    this.props.getAllListings(this.props.latLng);
   }
 
   render() {
@@ -27,14 +27,18 @@ class Parkings extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    const rentings =
-      this.props.allListings &&
-      this.props.allListings.map((item, idx) => (
+    let rentings = null;
+    
+    if ((this.props.allListings) != null && typeof(this.props.allListings) != "string"){
+      console.log(typeof this.props.allListings)
+        rentings = this.props.allListings.map((item, idx) => (
         <ParkingSpots key={idx} parkingSpot={item} />
       ));
+    }
+    
 
     return (
-      <Styled.Wrapper className="jumbotron">
+      <Styled.Wrapper >
         <Styled.MenuWrapper>
           <div className="row">
             <Styled.LocationSearchBar className="col-sm-11 col-md-11 col-lg-4">
@@ -65,7 +69,7 @@ class Parkings extends Component {
             <ParkingSpots title="DMart Parking" description="Parking hours between 2 PM to 3 PM" />
             <ParkingSpots title="Apna Bazar Parking" description="Parking hours between 1 PM to 6 PM" />
             <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" /> */}
-            {rentings}
+            { this.props.listingError != null  ? <div> {this.props.listingError}</div>:rentings}
           </Styled.Parkings>
         </div>
         {this.props.reserveSpotModalData != null ? (
@@ -87,7 +91,9 @@ const mapStateToProps = state => {
   return {
     showReserveSpotModal: state.uiState.showReserveSpotModal,
     allListings: state.listingState.allListings,
-    reserveSpotModalData: state.uiState.reserveSpotModalData
+    listingError: state.listingState.error,
+    reserveSpotModalData: state.uiState.reserveSpotModalData,
+    latLng:state.mapState.latLng
   };
 };
 

@@ -5,6 +5,7 @@ const SigninForm = styled.div`
     padding: 20px 0px 0px 0px;
     background-color:transparent;
     margin-bottom:0px;
+    
 `;
 const FormNote = styled.div`
 

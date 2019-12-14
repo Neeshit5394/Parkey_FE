@@ -20,13 +20,18 @@ export const updateListings = (oldList, newData) => {
     payload: newList
   };
 };
-export const getAllListings = () => async dispatch => {
-  let { data } = await axios.get("http://localhost:8080/listings");
+export const getAllListings = (latLng) => async dispatch => {
+  let { data } = await axios.get(`http://localhost:8080/listings/${latLng.lat}/${latLng.lng}/5`);
+  
   try {
-    if (data) {
+    if (data != null) {
       dispatch({ type: actionTypes.GET_ALL_LISTINGS, payload: data });
+    }
+    else{
+      throw "No Parking in this area"
     }
   } catch (e) {
     console.log(e);
+    dispatch({ type: actionTypes.GET_ALL_LISTINGS_ERROR, payload: e });
   }
 };
