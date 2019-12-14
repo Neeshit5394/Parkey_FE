@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Styled from "./styled";
-import {
-  toggleReserveSpot,
-  toggleAuthModal
-} from "../../../store/actions/UIActions";
+import { toggleReserveSpot, toggleAuthModal } from "../../../store/actions";
 import { connect } from "react-redux";
 import moment from "moment";
 
@@ -11,20 +8,16 @@ class ParkingSpot extends Component {
   constructor(props) {
     super(props);
   }
+
   state = {
     hasError: false
   };
-
-  componentDidMount = () => {
-    console.log("ParkingSpot mounted");
-  };
-
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
     return (
-      <Styled.ParkingSpot className="jumbotron">
+      <Styled.ParkingSpot>
         <div className="title">
           <h4>{this.props.parkingSpot.locationName}</h4>
         </div>
@@ -47,11 +40,11 @@ class ParkingSpot extends Component {
           <button
             type="button"
             className="btn btn-primary btn-md"
-            onClick={() => {
-              if (this.props.currentUser) {
-                this.props.toggleReserveSpot(this.props.parkingSpot);
-              } else this.props.toggleAuthModal();
-            }}
+            onClick={() =>
+              this.props.currentUser != null
+                ? this.props.toggleReserveSpot(this.props.parkingSpot)
+                : this.props.toggleAuthModal()
+            }
           >
             Reserve Spot
           </button>
@@ -60,11 +53,14 @@ class ParkingSpot extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    currentUser: state.authState.currentUser
+  };
+};
+
 const mapActionsToProps = {
   toggleReserveSpot,
   toggleAuthModal
-};
-const mapStateToProps = state => {
-  return { currentUser: state.authState.currentUser };
 };
 export default connect(mapStateToProps, mapActionsToProps)(ParkingSpot);

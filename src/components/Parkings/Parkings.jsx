@@ -6,65 +6,64 @@ import Styled from "./styled";
 import ReserveSpotModal from "../ReserveSpotModal";
 import { connect } from "react-redux";
 import { getAllListings } from "./../../store/actions";
+import { Redirect } from "react-router-dom";
 
 class Parkings extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      hasError: false,
+      show: false,
+      hide: true
+    };
   }
-  state = {
-    hasError: false,
-    show: false,
-    hide: true
-  };
 
   componentDidMount() {
-    this.props.getAllListings();
+    this.props.getAllListings(this.props.latLng);
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props)
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    const rentings =
-      this.props.allListings &&
-      this.props.allListings.map((item, idx) => (
+    let rentings = null;
+
+    if (
+      this.props.allListings != null &&
+      typeof this.props.allListings != "string"
+    ) {
+      rentings = this.props.allListings.map((item, idx) => (
         <ParkingSpots key={idx} parkingSpot={item} />
       ));
+    }
 
     return (
-      <Styled.Wrapper className="jumbotron">
+      <Styled.Wrapper>
         <Styled.MenuWrapper>
           <div className="row">
             <Styled.LocationSearchBar className="col-sm-11 col-md-11 col-lg-4">
               <LocationSearchBar />
             </Styled.LocationSearchBar>
-            <Styled.MenuBtn className="col-sm-11 col-md-11 col-lg-1">
-              <button type="button" className="btn btn-primary">
-                Rent
-              </button>
-            </Styled.MenuBtn>
-            <Styled.MenuBtn className="col-sm-11 col-md-11 col-lg-1">
-              <button type="button" className="btn btn-primary">
-                Filter
-              </button>
-            </Styled.MenuBtn>
           </div>
         </Styled.MenuWrapper>
 
         <div className="row">
           <Styled.MapContainer className="col-sm-12 col-md-8 col-lg-8">
             <div className="map">
-              <Map latLng={this.props.location.state.latLng} />
+              <Map
+                latLng={this.props.location.state && this.props.location.state.latLng}
+              />
             </div>
           </Styled.MapContainer>
 
           <Styled.Parkings className="col-sm-12 col-md-4 col-lg-4 fixed-content">
-            {/* <ParkingSpots title="Gurdwara Temple Parking" description="Parking hours between 2 AM to 8 PM " />
-            <ParkingSpots title="DMart Parking" description="Parking hours between 2 PM to 3 PM" />
-            <ParkingSpots title="Apna Bazar Parking" description="Parking hours between 1 PM to 6 PM" />
-            <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" /> */}
-            {rentings}
+            {this.props.listingError != null ? (
+              <div> {this.props.listingError}</div>
+            ) : (
+              rentings
+            )}
           </Styled.Parkings>
         </div>
         {this.props.reserveSpotModalData != null ? (
@@ -86,7 +85,9 @@ const mapStateToProps = state => {
   return {
     showReserveSpotModal: state.uiState.showReserveSpotModal,
     allListings: state.listingState.allListings,
-    reserveSpotModalData: state.uiState.reserveSpotModalData
+    listingError: state.listingState.error,
+    reserveSpotModalData: state.uiState.reserveSpotModalData,
+    latLng: state.mapState.latLng
   };
 };
 

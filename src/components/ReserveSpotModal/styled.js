@@ -27,23 +27,23 @@ const ModalHeader = styled(Modal.Header)`
     }
 `;
 const ModalBody = styled(Modal.Body)`
-    padding:0px;
+
     color:#082937;
-    padding-bottom:2px;
+    padding:8px;
     .heading-3{
         font-size:18px;
     }
     .termsCondition{
-        padding-top:5px;
+     
         font-size:10px;
     }
     .spot-available-time-box{
-        padding:5px 15px 5px 15px;
+
         border:2px solid black;
         color:#082937;
         border-radius:5px;
         border-color:#082937;
-        width:20px;
+
     }
 `;
 
@@ -57,7 +57,7 @@ const Logo = styled.span`
 const Footer = styled.div`
 
     width:100%;  
-    text-align:right;
+    text-align:center;
     font-size:15px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     .btn{

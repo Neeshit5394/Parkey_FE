@@ -79,7 +79,7 @@ class Signin extends Component {
       return <h1>Something went wrong.</h1>;
     }
     return (
-      <Styled.SigninForm className="jumbotron">
+      <Styled.SigninForm>
         <Alert key="danger-alert" show={this.state.visible} variant="danger">
           {this.state.error}
         </Alert>

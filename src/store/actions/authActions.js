@@ -4,7 +4,9 @@ import * as actionTypes from "./actionTypes";
 
 export const signIn = cred => async dispatch => {
   try {
-    const { user } = await firebase
+    const {
+      user
+    } = await firebase
       .auth()
       .signInWithEmailAndPassword(cred.email, cred.password);
     dispatch({
@@ -19,12 +21,15 @@ export const signIn = cred => async dispatch => {
 };
 export const signUp = cred => async dispatch => {
   try {
-    const { user } = await firebase
+    const {
+      user
+    } = await firebase
       .auth()
       .createUserWithEmailAndPassword(cred.email, cred.password);
     if (user) {
-      console.log("posting");
-      let { data } = await axios.post("http://localhost:8080/users", {
+      let {
+        data
+      } = await axios.post(`${process.env.REACT_APP_BE_URL}/users`, {
         firstName: cred.firstName,
         lastName: cred.lastName,
         email: user.email,
@@ -88,8 +93,9 @@ export const getCurrentUser = () => dispatch => {
 };
 
 export const getUserData = id => async dispatch => {
-  console.log("getting");
-  let { data } = await axios.get(`http://localhost:8080/users/${id}`);
+  let {
+    data
+  } = await axios.get(`${process.env.REACT_APP_BE_URL}/users/${id}`);
   if (data) {
     dispatch({
       type: actionTypes.GET_USER_DATA,
@@ -97,12 +103,38 @@ export const getUserData = id => async dispatch => {
     });
   }
 };
-export const updatePhoneNumber = async (id, newNumber) => {
-  try {
-    await axios.patch(`http://localhost:8080/users/${id}`, {
-      phnumber: newNumber
-    });
-  } catch {
-    console.log("an error ocurred");
+
+export const updatePassword = (oldPassword, newPassword, email) => async dispatch => {
+  let reauthenticate = async (oldPassword) => {
+
+    let user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(
+      email, oldPassword)
+    return user.reauthenticateAndRetrieveDataWithCredential(cred)
+
   }
-};
+  try {
+    let reauthentic = await reauthenticate(oldPassword);
+    let user = firebase.auth().currentUser;
+    user.updatePassword(newPassword).then(() => {
+      dispatch({
+        type: actionTypes.UPDATE_PASSWORD
+      })
+    }).catch((err) => {
+      dispatch({
+        type: actionTypes.UPDATE_PASSWORD_ERROR,
+        payload: err
+      })
+    })
+  } catch (err) {
+    dispatch({
+      type: actionTypes.UPDATE_PASSWORD_ERROR,
+      payload: err
+    })
+  }
+}
+export const resetUpdatePasswordFlag = () => {
+  return {
+      type: actionTypes.RESET_UPDATE_PASSWORD_FLAG
+  }
+}

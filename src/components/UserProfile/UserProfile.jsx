@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Styled from "./styled";
 import { Form, Row, Col, Button, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
-import { updatePhoneNumber } from "./../../store/actions";
+import { updatePassword, resetUpdatePasswordFlag} from "./../../store/actions";
 
 class UserProfile extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class UserProfile extends Component {
     this.state = {
       hasError: false,
       visible: false,
-      erro: "",
+      error: "",
       dangerVisibility: false
     };
   }
@@ -30,19 +30,6 @@ class UserProfile extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (
-      this.state.phoneNumber == null ||
-      this.state.phoneNumber == undefined ||
-      this.state.phoneNumber === ""
-    ) {
-      this.setState({
-        error: "Phone Number Empty",
-        dangerVisibility: true
-      });
-      return false;
-    } else {
-      updatePhoneNumber(this.props.profile.uid, this.state.phoneNumber);
-    }
     if (
       this.state.oldPassword == null ||
       this.state.oldPassword == undefined ||
@@ -86,19 +73,43 @@ class UserProfile extends Component {
       this.props.updatePassword(
         this.state.oldPassword,
         this.state.newPassword,
-        this.state.email
+        this.props.userData.email
       );
     }
   };
 
   handleChange = e => {
     this.setState({
-      erro: "",
+      error: "",
       dangerVisibility: false,
       [e.target.id]: e.target.value
     });
   };
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    if (this.props.password_update_status === true) {
+      this.onShowAlert()
+      this.props.resetUpdatePasswordFlag();
+      this.setState({
+        oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+      })
+    }
+   
+    if (this.props.password_update_status === false) {
+      this.setState({
+        error: this.props.update_password_err.message,
+        dangerVisibility: true,
+      })
+      try {
+        this.props.resetUpdatePasswordFlag();
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
@@ -144,10 +155,9 @@ class UserProfile extends Component {
             </Form.Label>
             <Col sm="8">
               <Form.Control
-                type="text"
-                onChange={this.handleChange}
-                placeholder="Phone Number"
-                value={this.state.lastName}
+                plaintext
+                readOnly
+                value={this.props.userData.phnumber}
               />
             </Col>
           </Form.Group>
@@ -169,6 +179,7 @@ class UserProfile extends Component {
                 type="password"
                 onChange={this.handleChange}
                 placeholder="Old Password"
+                value= {this.state.oldPassword}
               />
             </Col>
           </Form.Group>
@@ -181,6 +192,7 @@ class UserProfile extends Component {
                 type="password"
                 onChange={this.handleChange}
                 placeholder="New Password"
+                value={this.state.newPassword}
               />
             </Col>
           </Form.Group>
@@ -193,6 +205,7 @@ class UserProfile extends Component {
                 type="password"
                 onChange={this.handleChange}
                 placeholder="Confirm Password"
+                value={this.state.confirmPassword}
               />
             </Col>
           </Form.Group>
@@ -208,10 +221,16 @@ class UserProfile extends Component {
     );
   }
 }
+const mapsActionToProps = {
+  updatePassword,
+  resetUpdatePasswordFlag,
+}
 const mapStateToProps = state => {
   return {
-    userData: state.authState.userData
+    userData: state.authState.userData,
+    password_update_status: state.authState.password_update_status,
+    update_password_err: state.authState.update_password_err,
   };
 };
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps,mapsActionToProps)(UserProfile);

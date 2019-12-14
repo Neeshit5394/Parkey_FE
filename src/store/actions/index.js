@@ -4,18 +4,21 @@ export {
   resetErrorFlag,
   signOut,
   getCurrentUser,
-  updatePhoneNumber,
-  getUserData
+  //updatePhoneNumber,
+  updatePassword,
+  getUserData,
+  resetUpdatePasswordFlag
 } from "./authActions";
 
-export { toggleAuthModal } from "./UIActions";
+export { toggleAuthModal, toggleReserveSpot } from "./UIActions";
 
 export { setLatLang, getListing, selectAddress } from "./mapActions";
 
-export { endReservation } from "./rentingAction";
+export { reserveSpot, getUserRentings, updateRentings } from "./rentingAction";
 
 export {
   getUserListings,
   updateListings,
-  getAllListings
+  getAllListings,
+  deleteListing
 } from "./listingActions";

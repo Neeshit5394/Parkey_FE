@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import Styled from "./styled";
-import Dashboard from "../Dashboard";
-import { Redirect } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import Rentings from "../Rentings";
 import UserProfile from "../UserProfile";
 import Listing from "../Listing";
-import { connect } from "react-redux";
-//import { getIntakeCalorie, getCurrentDayCalorieIntake, getCurrentWeekCalorieIntake} from "../../store/actions"
 
 class ProfileSection extends Component {
   state = {
@@ -15,7 +11,6 @@ class ProfileSection extends Component {
     userProfile: true
   };
   clearState = {
-    // dashboard:false,
     renting: false,
     listing: false,
     userProfile: false
@@ -44,9 +39,6 @@ class ProfileSection extends Component {
             activeKey={this.state.activeKey}
             onSelect={this.handleSelect}
           >
-            {/* <Nav.Item >
-            <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
-          </Nav.Item> */}
             <Nav.Item>
               <Nav.Link eventKey="userProfile">Profile</Nav.Link>
             </Nav.Item>
@@ -58,7 +50,6 @@ class ProfileSection extends Component {
             </Nav.Item>
           </Nav>
         </Styled.SubNav>
-        {/* {dashboard} */}
         {rentings}
         {listing}
         {userProfile}
@@ -84,17 +75,4 @@ class ProfileSection extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  // console.log(state)
-  return {
-    auth: state.firebase.auth
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    //getIntakeCalorie:() => dispatch(getIntakeCalorie()),
-    //getCurrentDayCalorieIntake:()=>dispatch(getCurrentDayCalorieIntake()),
-    //getCurrentWeekCalorieIntake:()=>dispatch(getCurrentWeekCalorieIntake())
-  };
-};
 export default ProfileSection;

@@ -54,7 +54,7 @@ class Listing extends Component {
       return false;
     } else {
       let { data } = await axios.post(
-        `http://localhost:8080/listings/${this.props.currentUser}`,
+        `${process.env.REACT_APP_BE_URL}/listings/${this.props.currentUser}`,
         {
           lat: this.props.coordinates.lat,
           lng: this.props.coordinates.lng,
@@ -74,10 +74,10 @@ class Listing extends Component {
       if (data) {
         this.props.updateListings(this.props.userListings, data);
       }
+      this.myFormRef.reset();
     }
   };
   render() {
-    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -118,7 +118,10 @@ class Listing extends Component {
             >
               {this.state.error}
             </Alert>
-            <Form onSubmit={this.handleSubmit}>
+            <Form
+              onSubmit={this.handleSubmit}
+              ref={el => (this.myFormRef = el)}
+            >
               <Form.Group controlId="Location">
                 <Form.Label>Location</Form.Label>
                 <ListingSearchBar getLocation={this.handleChange} />
@@ -150,7 +153,6 @@ class Listing extends Component {
                       placeholder="Date"
                       onChange={e => {
                         e.preventDefault();
-                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           startDate: e.target.value
@@ -171,7 +173,6 @@ class Listing extends Component {
                       placeholder="Start Time"
                       onChange={e => {
                         e.preventDefault();
-                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           startTime: e.target.value
@@ -194,7 +195,6 @@ class Listing extends Component {
                       placeholder="End Date"
                       onChange={e => {
                         e.preventDefault();
-                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           endDate: e.target.value
