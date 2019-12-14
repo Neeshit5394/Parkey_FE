@@ -13,7 +13,6 @@ class Rentings extends Component {
     this.props.getUserRentings(this.props.currentUser);
   }
   render() {
-    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }

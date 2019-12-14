@@ -27,7 +27,6 @@ export const signUp = cred => async dispatch => {
       .auth()
       .createUserWithEmailAndPassword(cred.email, cred.password);
     if (user) {
-      console.log("posting");
       let {
         data
       } = await axios.post(`${process.env.REACT_APP_BE_URL}/users`, {
@@ -104,15 +103,7 @@ export const getUserData = id => async dispatch => {
     });
   }
 };
-// export const updatePhoneNumber = async (id, newNumber) => {
-//   try {
-//     await axios.patch(`process.env.REACT_APP_BE_URL/users/${id}`, {
-//       phnumber: newNumber
-//     });
-//   } catch {
-//     console.log("an error ocurred");
-//   }
-// };
+
 export const updatePassword = (oldPassword, newPassword, email) => async dispatch => {
   let reauthenticate = async (oldPassword) => {
 

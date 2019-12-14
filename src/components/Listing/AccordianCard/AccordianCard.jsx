@@ -14,8 +14,6 @@ class AccordianCard extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    // let a = moment.unix(moment().valueOf());
-    // let b = moment.unix(this.props.startTime);
     return (
       <Styled.Container>
         <Card>
@@ -53,8 +51,12 @@ class AccordianCard extends Component {
                       .format("M/D/YYYY hh:mm a")}
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6">
-                    <div className="heading">Time to expiry</div>{" "}
-                    {/*TODO: add moment syntax for calculating time diff */}
+                    <div className="heading">Status</div>{" "}
+                    {moment().valueOf() > this.props.detail.startTime
+                      ? moment().valueOf() < this.props.detail.endTime
+                        ? "Active"
+                        : "Expired"
+                      : "Yet To Start"}
                   </div>
                 </div>
               </Styled.Listing>

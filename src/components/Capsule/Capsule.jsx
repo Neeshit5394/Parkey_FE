@@ -22,10 +22,9 @@ class Capsule extends Component {
   };
 
   render() {
-    console.log(this.state);
     if (this.state.beStatus) {
       return (
-        <div>
+        <div className="not-found">
           <h1>Backend Server not detected! Please check connection.</h1>
         </div>
       );

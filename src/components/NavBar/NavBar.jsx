@@ -30,7 +30,6 @@ class NavBar extends Component {
   }
 
   render() {
-    // console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -51,11 +50,6 @@ class NavBar extends Component {
                     <Styled.navlink className="nav-link">Rent</Styled.navlink>
                   </Link>
                 </li>
-                {/* <li className="nav-item">
-                  <Link to="/user">
-                    <Styled.navlink className="nav-link">User</Styled.navlink>
-                  </Link>
-                </li> */}
                 <li className="nav-item">
                   <Link to="/">
                     <Styled.navlink className="nav-link">Find</Styled.navlink>
@@ -94,6 +88,14 @@ class NavBar extends Component {
               )}
             </Route>
             <Route path="/Parkings/:id" component={Parkings} />
+            <Route
+              path="*"
+              component={() => (
+                <div className="not-found">
+                  <h1>Not Found!</h1>
+                </div>
+              )}
+            />
           </Switch>
         </Router>
         <Authentication

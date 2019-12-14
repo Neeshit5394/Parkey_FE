@@ -49,7 +49,7 @@ class ReserveSpotModal extends Component {
               </div>
               <div className="col-sm-12 col-lg-4 col-md-4">
                 <h3 className="display-4 heading-3">Price</h3>
-                <p>{this.props.spot.price} $</p>
+                <p>$ {this.props.spot.price}</p>
               </div>
             </div>
             <p className="termsCondition">

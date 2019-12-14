@@ -6,6 +6,7 @@ import Styled from "./styled";
 import ReserveSpotModal from "../ReserveSpotModal";
 import { connect } from "react-redux";
 import { getAllListings } from "./../../store/actions";
+import { Redirect } from "react-router-dom";
 
 class Parkings extends Component {
   constructor(props) {
@@ -14,8 +15,7 @@ class Parkings extends Component {
     this.state = {
       hasError: false,
       show: false,
-      hide: true,
-      latLng: this.props.location.state.latLng
+      hide: true
     };
   }
 
@@ -24,7 +24,7 @@ class Parkings extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.props)
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -52,15 +52,13 @@ class Parkings extends Component {
         <div className="row">
           <Styled.MapContainer className="col-sm-12 col-md-8 col-lg-8">
             <div className="map">
-              <Map latLng={this.state.latLng} />
+              <Map
+                latLng={this.props.location.state && this.props.location.state.latLng}
+              />
             </div>
           </Styled.MapContainer>
 
           <Styled.Parkings className="col-sm-12 col-md-4 col-lg-4 fixed-content">
-            {/* <ParkingSpots title="Gurdwara Temple Parking" description="Parking hours between 2 AM to 8 PM " />
-            <ParkingSpots title="DMart Parking" description="Parking hours between 2 PM to 3 PM" />
-            <ParkingSpots title="Apna Bazar Parking" description="Parking hours between 1 PM to 6 PM" />
-            <ParkingSpots title="Shop Rite Parking" description="Parking hours between 2 PM to 4 PM" /> */}
             {this.props.listingError != null ? (
               <div> {this.props.listingError}</div>
             ) : (

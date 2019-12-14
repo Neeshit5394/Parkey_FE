@@ -78,7 +78,6 @@ class Listing extends Component {
     }
   };
   render() {
-    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -154,7 +153,6 @@ class Listing extends Component {
                       placeholder="Date"
                       onChange={e => {
                         e.preventDefault();
-                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           startDate: e.target.value
@@ -175,7 +173,6 @@ class Listing extends Component {
                       placeholder="Start Time"
                       onChange={e => {
                         e.preventDefault();
-                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           startTime: e.target.value
@@ -198,7 +195,6 @@ class Listing extends Component {
                       placeholder="End Date"
                       onChange={e => {
                         e.preventDefault();
-                        console.log(e.target.value);
                         this.setState({
                           ...this.state,
                           endDate: e.target.value
