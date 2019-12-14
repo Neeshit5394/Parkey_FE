@@ -40,17 +40,6 @@ class AuthenticationModal extends Component {
               </Tab>
             </Tabs>
           </Styled.ModalBody>
-          <Modal.Footer>
-            {/* <Styled.Footer>
-              <p>Connect with using: </p>
-              <FacebookLoginButton align="center" iconSize="15px" size="35px">
-                <span className="social-media-btn">Continue with Facebook</span>
-              </FacebookLoginButton>
-              <GoogleLoginButton align="center" iconSize="15px" size="40px">
-                <span className="social-media-btn">Continue with Google</span>
-              </GoogleLoginButton>
-            </Styled.Footer> */}
-          </Modal.Footer>
         </Modal>
       </Styled.AuthenticationModal>
     );

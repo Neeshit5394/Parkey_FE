@@ -5,8 +5,9 @@ export const toggleAuthModal = () => dispatch => {
     type: actionTypes.TOGGLE_AUTH_MODEL,
   });
 };
-export const toggleReserveSpot = () => dispatch => {
+export const toggleReserveSpot = (parkingSpot) => dispatch => {
   dispatch({
     type: actionTypes.TOGGLE_RESERVE_SPOT_MODAL,
+    payload:parkingSpot
   });
 };

@@ -1,47 +1,25 @@
-import  styled  from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
-    padding:20px
-    .jumbotron{
-        padding:5px;
-        background-color:white;
+    padding:20px;
+    .rentings{
+        padding:25px;
     }
     .card-view{
         margin-bottom:25px;
     }
     .card{
-        color:white;
-        font-family: 'Comfortaa', cursive;
-        font-weight:600;
+        color:black;
+        border:none;
+        box-shadow:1px 0px 5px 0px black;
+        padding:5px;
+        margin-bottom:25px;
+        text-align:justify;
     }
-    .breakfast-card{
-        background-image:url(${require("../../images/flyer1.jpg")});
-    }
-    .cal-display{
-        font-family: 'Comfortaa', cursive;
-    }
-    .cal-value{
-        font-weight:600;
-    }
-    .metric-val{
-        font-size:15vh;
-    }
-    .metric-unit{
-        font-size:80%;
-    }
-    .cal-desc{
-        font-size:250%:
-    }
-    
-    .service-btn{
-        background-color:#874F34;
-        border-color:transparent;
-        font-family: 'Comfortaa', cursive;
-    }
-    .service-btn:hover, .service-btn:active{
-        background-color:#7B3942;
-        border-color:transparent;
-        font-family: 'Comfortaa', cursive;
+    .sub-title{
+        font-weight:500;
+        padding-top:10px;
+        font-size:15px;
     }
 
 `;

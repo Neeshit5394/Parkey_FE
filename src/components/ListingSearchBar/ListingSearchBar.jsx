@@ -18,6 +18,9 @@ class ListingSearchBar extends React.Component {
       selectedAddress: ""
     };
   }
+  componentDidMount() {
+    this.props.selectAddress(null, null);
+  }
 
   handleChange = address => {
     if (address === "" || address === undefined) {
@@ -41,11 +44,6 @@ class ListingSearchBar extends React.Component {
       let results = await geocodeByAddress(address);
       let latLng = await getLatLng(results[0]);
       this.props.selectAddress(address, latLng);
-      this.props.setLatLang(latLng);
-      this.props.history.push({
-        pathname: `/parkings/${address}`,
-        state: { latlang: latLng }
-      });
     } catch (e) {
       console.log(e);
     }

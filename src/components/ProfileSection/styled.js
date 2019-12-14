@@ -4,7 +4,7 @@ const SubNav = styled.div `
     padding:5px;
     border-top:1px solid lightgrey;
     border-bottom:1px solid lightgrey;
-    font-family: 'Comfortaa', cursive;
+    // font-family: 'Comfortaa', cursive;
    .nav-link{
        color:grey;
    }
