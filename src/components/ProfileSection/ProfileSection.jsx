@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Styled from "./styled";
-import Dashboard from "../Dashboard";
+// import Dashboard from "../Dashboard";
 import { Redirect } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import Rentings from "../Rentings";

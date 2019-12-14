@@ -10,13 +10,14 @@ import { getAllListings } from "./../../store/actions";
 class Parkings extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      hasError: false,
+      show: false,
+      hide: true,
+      latLng: this.props.location.state.latLng
+    };
   }
-  state = {
-    hasError: false,
-    show: false,
-    hide: true,
-    latLng: this.props.location.state.latLng
-  };
 
   componentDidMount() {
     this.props.getAllListings(this.props.latLng);

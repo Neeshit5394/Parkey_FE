@@ -72,6 +72,7 @@ class ReserveSpotModal extends Component {
                       this.props.spot._id,
                       this.props.currentUser
                     );
+                    this.props.toggleReserveSpot();
                   }}
                 >
                   Reserve Now
