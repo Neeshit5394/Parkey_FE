@@ -16,7 +16,14 @@ class Rentings extends Component {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
-    let activeRentings =
+    if (this.props.activeRentings && this.props.activeRentings.length === 0) {
+      return (
+        <div className="not-found">
+          <h1>You have no current reserved rentings!</h1>
+        </div>
+      );
+    }
+    let rentings =
       this.props.activeRentings &&
       this.props.activeRentings.map((item, idx) => {
         return <Cards key={idx} rentingDetail={item} />;
@@ -26,7 +33,7 @@ class Rentings extends Component {
         <div className="rentings">
           <h2>Your Rentings</h2>
           <hr width="70%" align="left" />
-          {activeRentings}
+          {rentings}
         </div>
       </Styled.Container>
     );

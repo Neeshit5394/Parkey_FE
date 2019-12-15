@@ -2,25 +2,29 @@ import React, { Component } from "react";
 import Styled from "./styled";
 import AuthenticationModal from "../Authentication";
 import LocationSearchInput from "../LocationSearchBar";
+import { toggleAuthModal } from "./../../store/actions";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInModalShow: false,
-      hadError: false
+      hasError: false,
+      redirect1: null,
+      redirect2: null
     };
-  }
-
-  signInToggle() {
-    this.setState({
-      signInModalShow: !this.state.signInModalShow
-    });
   }
 
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
+    }
+    if (this.state.redirect1) {
+      return <Redirect to="/Parkings/home" />;
+    }
+    if (this.state.redirect2) {
+      return <Redirect to="/user" />;
     }
     return (
       <>
@@ -63,7 +67,11 @@ class Landing extends Component {
                   <Styled.center>
                     <button
                       type="button"
-                      onClick={() => this.signInToggle()}
+                      onClick={() => {
+                        this.props.currentUser
+                          ? this.setState({ ...this.state, redirect2: true })
+                          : this.props.toggleAuthModal();
+                      }}
                       className="btn btn-primary btn-lg service-btn"
                     >
                       Start Renting
@@ -91,7 +99,11 @@ class Landing extends Component {
                   <Styled.center>
                     <button
                       type="button"
-                      onClick={() => this.signInToggle()}
+                      onClick={() =>
+                        this.props.currentUser
+                          ? this.setState({ ...this.state, redirect1: true })
+                          : this.props.toggleAuthModal()
+                      }
                       className="btn btn-primary btn-lg service-btn "
                     >
                       Find Parking Spot
@@ -142,5 +154,13 @@ class Landing extends Component {
     );
   }
 }
+const mapActionsToProps = {
+  toggleAuthModal
+};
+const mapStateToProps = state => {
+  return {
+    currentUser: state.authState.currentUser
+  };
+};
 
-export default Landing;
+export default connect(mapStateToProps, mapActionsToProps)(Landing);

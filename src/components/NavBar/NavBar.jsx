@@ -3,7 +3,6 @@ import Styled from "./styled";
 import Parkings from "../Parkings";
 import LandingPage from "../Landing";
 import ProfileSection from "../ProfileSection";
-// import User from "../User";
 import {
   BrowserRouter as Router,
   Link,
@@ -14,10 +13,8 @@ import {
 import Authentication from "../Authentication";
 import { connect } from "react-redux";
 import SignInLinks from "./SignInLinks";
-// import { toogleAuthModal } from "../../store/actions";
 import SignOutLinks from "./SignOutLinks";
 import { toggleAuthModal, getCurrentUser } from "./../../store/actions";
-import UserProfile from "../UserProfile";
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -46,13 +43,8 @@ class NavBar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/">
+                  <Link to="/parkings/home">
                     <Styled.navlink className="nav-link">Rent</Styled.navlink>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/">
-                    <Styled.navlink className="nav-link">Find</Styled.navlink>
                   </Link>
                 </li>
               </ul>

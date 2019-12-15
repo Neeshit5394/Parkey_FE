@@ -24,7 +24,7 @@ class Parkings extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
@@ -53,7 +53,11 @@ class Parkings extends Component {
           <Styled.MapContainer className="col-sm-12 col-md-8 col-lg-8">
             <div className="map">
               <Map
-                latLng={this.props.location.state && this.props.location.state.latLng}
+                latLng={
+                  this.props.location.state
+                    ? this.props.location.state.latLng
+                    : this.props.latLng
+                }
               />
             </div>
           </Styled.MapContainer>
