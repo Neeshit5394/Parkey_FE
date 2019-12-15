@@ -38,7 +38,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log(this.props);
     var final;
     if (
       this.props.allListings != null &&

@@ -24,7 +24,6 @@ class Parkings extends Component {
   }
 
   render() {
-    console.log(this.props);
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
     }
