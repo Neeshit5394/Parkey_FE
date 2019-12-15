@@ -38,6 +38,8 @@ class AccordianCard extends Component {
                     <div className="heading">Location</div>
                     <p>{this.props.detail && this.props.detail.locationName}</p>
                   </div>
+                </div>
+                <div className="row">
                   <div className="col-sm-12 col-md-6 col-lg-6">
                     <div className="heading">Start Time</div>
                     {moment
@@ -50,6 +52,8 @@ class AccordianCard extends Component {
                       .unix(this.props.detail.endTime / 1000)
                       .format("M/D/YYYY hh:mm a")}
                   </div>
+                </div>
+                <div className="row">
                   <div className="col-sm-12 col-md-6 col-lg-6">
                     <div className="heading">Status</div>{" "}
                     {moment().valueOf() > this.props.detail.startTime
@@ -57,6 +61,10 @@ class AccordianCard extends Component {
                         ? "Active"
                         : "Expired"
                       : "Yet To Start"}
+                  </div>
+                  <div className="col-sm-12 col-md-6 col-lg-6">
+                    <div className="heading">Price</div>
+                    <p>$ {this.props.detail && this.props.detail.price}</p>
                   </div>
                 </div>
               </Styled.Listing>
